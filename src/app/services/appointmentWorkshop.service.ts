@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Appointment } from '../models/appointment.model';
 
-const baseUrl = 'https://garage365-api.netlify.app/api/appointmentWorkshop';
+const baseUrl = 'https://garage365api.cyclic.app/api/appointmentWorkshop';
 
 @Injectable({
   providedIn: 'root',
