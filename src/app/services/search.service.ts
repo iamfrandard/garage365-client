@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Search } from '../models/search.model';
 
-const baseUrl = 'http://localhost:8080/api/appointment';
+const baseUrl = 'https://garage365-api.onrender.com/api/appointment';
 
 @Injectable({
   providedIn: 'root',
