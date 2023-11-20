@@ -5,7 +5,7 @@ import { Appointment } from '../models/appointment.model';
 
 const baseUrl = 'https://goldfish-app-67lk9.ondigitalocean.app/api/appointmentClient';
 
-const AUTH_API = 'http://localhost:8080';
+const AUTH_API = 'https://goldfish-app-67lk9.ondigitalocean.app/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
