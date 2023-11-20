@@ -12,9 +12,9 @@ export class PaymentCancelComponent {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      window.location.reload();
-    }, 5000);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 5000);
   }
 
   redirectToHome() {
