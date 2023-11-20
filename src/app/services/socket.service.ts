@@ -27,7 +27,7 @@ export class SocketService {
   newMessage$ = this.newMessageSubject.asObservable();
 
   private socket: any;
-  private readonly endpoint: string = 'http://localhost:8080';
+  private readonly endpoint: string = 'https://goldfish-app-67lk9.ondigitalocean.app/';
   private sessionId!: string;
 
   constructor(private http: HttpClient) {
