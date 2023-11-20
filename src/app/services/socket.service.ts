@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-const API_URL2 = 'http://localhost:8080/api/chat';
+const API_URL2 = 'https://goldfish-app-67lk9.ondigitalocean.app/api/chat';
 
 export interface ChatMessage {
   _id?: string;

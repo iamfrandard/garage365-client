@@ -13,7 +13,7 @@ interface TotalAppointmentsResponse {
   stats: AppointmentStat[];
 }
 
-const baseUrl = 'http://localhost:8080/taller/reportes';
+const baseUrl = 'https://goldfish-app-67lk9.ondigitalocean.app/taller/reportes';
 
 @Injectable({ providedIn: 'root' })
 export class ReportService {

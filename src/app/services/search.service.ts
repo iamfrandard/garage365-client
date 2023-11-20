@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Search } from '../models/search.model';
 
-const baseUrl = 'http://localhost:8080/api/appointment';
+const baseUrl = 'https://goldfish-app-67lk9.ondigitalocean.app/api/appointment';
 
 @Injectable({
   providedIn: 'root',

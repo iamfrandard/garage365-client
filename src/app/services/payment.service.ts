@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Appointment } from '../models/appointment.model';
 
-const baseUrl = 'http://localhost:8080/api/appointmentClient';
+const baseUrl = 'https://goldfish-app-67lk9.ondigitalocean.app/api/appointmentClient';
 
 const AUTH_API = 'http://localhost:8080';
 
