@@ -63,28 +63,6 @@
           <td><strong>Email:</strong></td>
           <td>{{ currentWorkshopData?.email }}</td>
         </tr>
-        <tr>
-          <td scope="row">
-            <input
-              type="checkbox"
-              (change)="selectDetailsWorkshop(currentWorkshopData?.certificate)"
-            />
-          </td>
-          <td><strong>Certificado:</strong></td>
-          <td>{{ currentWorkshopData?.certificate }}</td>
-          <!--  -->
-        </tr>
-        <tr>
-          <td scope="row">
-            <input
-              type="checkbox"
-              (change)="selectDetailsWorkshop(currentWorkshopData?.imagenes)"
-            />
-          </td>
-          <td><strong>Imagen:</strong></td>
-          <td>{{ currentWorkshopData?.imagenes }}</td>
-          <!-- <img src="{{ currentWorkshopData?.imagenes }}" /> -->
-        </tr>
       </tbody>
     </table>
     <button
