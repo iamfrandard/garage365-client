@@ -1,0 +1,149 @@
+.chat-list-container {
+  width: 420px;
+  height: auto;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+strong {
+  display: block;
+  margin-top: 9px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 1.1rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+li:hover {
+  background-color: #f7f7f7;
+}
+
+li.selected {
+  background-color: #e5e5e5;
+}
+
+.btn {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.chat_list {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat_list:hover {
+  background-color: #f7f7f7;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+  text-align: center;
+}
+
+.container {
+  max-width: 1190px;
+  margin: auto;
+}
+img {
+  max-width: 90%;
+}
+.inbox_people {
+  background: #f8f8f8 none repeat scroll 0 0;
+  float: left;
+  overflow: hidden;
+  width: 40%;
+  border-right: 1px solid #c4c4c4;
+}
+.inbox_msg {
+  border: 1px solid #c4c4c4;
+  clear: both;
+  overflow: hidden;
+}
+
+.chat_ib p {
+  font-size: 14px;
+  color: #989898;
+  margin: auto;
+}
+.chat_img {
+  float: left;
+  width: 14%;
+}
+.chat_ib {
+  float: left;
+  padding: 0 0 0 15px;
+  width: 88%;
+}
+
+.chat_people {
+  overflow: hidden;
+  clear: both;
+}
+.chat_list {
+  border-bottom: 2px solid #c4c4c4;
+  margin: 0;
+  padding: 18px 16px 10px;
+}
+.inbox_chat {
+  height: 1040px;
+  overflow-y: scroll;
+}
+
+.active_chat {
+  background: #ebebeb;
+}
+.received_msg {
+  display: inline-block;
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: 92%;
+}
+
+@media (max-width: 768px) {
+  .chat-list-container {
+    width: 100%;
+    height: auto;
+  }
+
+  .inbox_people {
+    width: 100%;
+  }
+
+  .inbox_chat {
+    height: auto;
+  }
+
+  .chat_ib,
+  .chat_img {
+    float: none;
+    width: 40%;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  li {
+    padding: 0.8rem;
+  }
+
+  .chat_ib p {
+    font-size: 12px;
+  }
+}

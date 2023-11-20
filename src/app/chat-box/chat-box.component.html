@@ -1,0 +1,35 @@
+<div class="taller-chat-box">
+  <div class="chat-header">
+    <span class="taller-name">{{
+      userId === TallerId ? "Nombre del Taller" : userName
+    }}</span>
+    <span class="taller-status" [class.online]="isOnline">En línea</span>
+  </div>
+  <div class="message-container" #messageContainer>
+    <ng-container *ngFor="let message of messages">
+      <!-- Si el mensaje es tuyo -->
+      <div *ngIf="message.sender === TallerId" class="message sent-message">
+        {{ message.content + "    " }}
+        <span class="timestampU">{{
+          message.createdAt | date : "shortTime"
+        }}</span>
+      </div>
+
+      <!-- Si el mensaje es del otro usuario (el taller en este caso) -->
+      <div *ngIf="message.sender !== TallerId" class="message received-message">
+        {{ message.content + "    " }}
+        <span class="timestamp">{{
+          message.createdAt | date : "shortTime"
+        }}</span>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="input-container">
+    <textarea
+      [(ngModel)]="newMessage"
+      placeholder="Escribe tu mensaje..."
+    ></textarea>
+    <button (click)="sendMessage()">Enviar</button>
+  </div>
+</div>

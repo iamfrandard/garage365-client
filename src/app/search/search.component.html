@@ -1,0 +1,73 @@
+<app-header></app-header>
+
+<br />
+<br />
+
+<section id="Workshops" class="portfolio">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Busqueda de Talleres</h2>
+    </div>
+
+    <div class="search-and-filters">
+      <div class="input-container">
+        <input
+          type="text"
+          placeholder="Buscar Taller, Marca, Direccion"
+          [(ngModel)]="searchValue"
+          #searchBox
+          (input)="search(searchBox.value)"
+        />
+        <button class="search-button" (click)="search(searchBox.value)">
+          Buscar
+        </button>
+      </div>
+      <div class="filters-container">
+        <select
+          placeholder="Filtrar Marca"
+          [(ngModel)]="selectedBrand"
+          (change)="onBrandSelected($event)"
+        >
+          <option value="" disabled selected>Filtrar por marca</option>
+          <option *ngFor="let brand of brands" [value]="brand">
+            {{ brand?.name }}
+          </option>
+        </select>
+        <select
+          [(ngModel)]="selectedAddress"
+          (change)="onAddressSelected($event)"
+        >
+          <option value="" disabled selected>Filtrar por dirección</option>
+          <option *ngFor="let address of addresses" [value]="address">
+            {{ address }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <div *ngIf="loading" class="loader-container">
+    <div class="loader"></div>
+  </div>
+
+  <div class="row" *ngIf="!loading && workshops.length > 0">
+    <div
+      class="card"
+      [routerLink]="['/appointment/', workshop._id]"
+      *ngFor="let workshop of workshops; let i = index"
+      (click)="setActiveTutorial(workshop, i)"
+    >
+      <img [src]="workshop.imagenes" alt="{{ workshop.WorkshopName }}" />
+      <h4>{{ workshop.WorkshopName }}</h4>
+    </div>
+  </div>
+  <div *ngIf="noResults" class="no-results">
+    <h3 class="no-results-message">
+      No existen Talleres con los criterios proporcionados!
+    </h3>
+  </div>
+  <div *ngIf="errorMessage" class="no-results">
+    <h3 class="no-results-message">{{ errorMessage }}</h3>
+  </div>
+</section>

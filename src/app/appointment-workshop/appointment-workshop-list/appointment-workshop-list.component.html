@@ -1,0 +1,804 @@
+<!-- INICIO Sesion por confirmar -->
+<section>
+  <div data-aos="fade-up">
+    <div class="section-title">
+      <h2>Reservas Por Confirmar</h2>
+    </div>
+
+    <!-- <div class="row">
+      <div class="col-md-6" *ngFor="let AppointmentClient of tutorials">
+        <div
+          *ngIf="
+            AppointmentClient.Status !== 'Completado' &&
+            AppointmentClient.Confirm == false
+          "
+        >
+          <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+            <i class="bi bi-card-checklist"></i>
+
+            <div
+              *ngFor="let Usuario of user"
+              (click)="setActiveTutorial(AppointmentClient, Usuario)"
+              (click)="getAllEmployee()"
+              data-bs-target="#modalConfirmation"
+              data-bs-toggle="modal"
+            >
+              <div *ngIf="AppointmentClient.UserID == Usuario._id">
+                <h4>{{ Usuario.firstName }} {{ Usuario.lastName }}</h4>
+                <p><strong>Cedula: </strong> {{ Usuario.idNumber }}</p>
+                <p><strong>Telefono: </strong> {{ Usuario.phoneNumber }}</p>
+                <p><strong>Correo Electronico: </strong> {{ Usuario.email }}</p>
+              </div>
+            </div>
+            <p><strong>Carro: </strong> {{ AppointmentClient.Cars }}</p>
+            <p><strong>Horario: </strong> {{ AppointmentClient.Schedule }}</p>
+            <p><strong>Ubicacion: </strong> {{ AppointmentClient.Location }}</p>
+            <p><strong>Servicio: </strong> {{ AppointmentClient.Service }}</p>
+            <p><strong>Comentario: </strong> {{ AppointmentClient.Comment }}</p>
+            <p *ngIf="AppointmentClient.PriorityService == true">
+              <strong>Servicio prioritario: </strong> Activo
+            </p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="scroll-container">
+      <table class="table scrollme">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Carro</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Horario</th>
+            <th scope="col">Servicio Prioritario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let AppointmentClient of tutorials">
+            <ng-container
+              *ngIf="
+                AppointmentClient.Status !== 'Completado' &&
+                AppointmentClient.Confirm == false
+              "
+            >
+              <tr>
+                <ng-container *ngFor="let Usuario of user">
+                  <ng-container *ngIf="AppointmentClient.UserID == Usuario._id">
+                    <td>
+                      <input
+                        type="checkbox"
+                        (click)="setActiveTutorial(AppointmentClient, Usuario)"
+                        (click)="getAllEmployee()"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalConfirmation"
+                      />
+                    </td>
+                    <td>{{ Usuario.firstName }} {{ Usuario.lastName }}</td>
+                    <td>{{ Usuario.phoneNumber }}</td>
+                  </ng-container>
+                </ng-container>
+                <td>{{ AppointmentClient.Cars }}</td>
+                <td>{{ AppointmentClient.Service }}</td>
+                <td>{{ AppointmentClient.Schedule }}</td>
+                <td *ngIf="AppointmentClient.PriorityService == true">
+                  Activo
+                </td>
+                <td *ngIf="AppointmentClient.PriorityService != true">
+                  Inactivo
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- FIN Sesion por confirmar -->
+
+<!-- INICIO Sesion en progreso -->
+<section>
+  <div data-aos="fade-up">
+    <div class="section-title">
+      <h2>Reservas En Progresos</h2>
+    </div>
+
+    <!-- <div class="row">
+      <div class="col-md-6" *ngFor="let AppointmentClient of tutorials">
+        <div
+          *ngIf="
+            AppointmentClient.Status !== 'Completado' &&
+            AppointmentClient.Confirm == true
+          "
+        >
+          <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+            <i class="bi bi-card-checklist"></i>
+
+            <div
+              *ngFor="let Usuario of user"
+              (click)="setActiveTutorial(AppointmentClient, Usuario)"
+              data-bs-target="#modalStatus"
+              data-bs-toggle="modal"
+            >
+              <div *ngIf="AppointmentClient.UserID == Usuario._id">
+                <h4>{{ Usuario.firstName }} {{ Usuario.lastName }}</h4>
+                <p><strong>Cedula: </strong> {{ Usuario.idNumber }}</p>
+                <p><strong>Telefono: </strong> {{ Usuario.phoneNumber }}</p>
+                <p><strong>Correo Electronico: </strong> {{ Usuario.email }}</p>
+              </div>
+            </div>
+
+            <p><strong>Carro: </strong> {{ AppointmentClient.Cars }}</p>
+            <p><strong>Horario: </strong> {{ AppointmentClient.Schedule }}</p>
+            <p><strong>Ubicacion: </strong> {{ AppointmentClient.Location }}</p>
+            <p><strong>Servicio: </strong> {{ AppointmentClient.Service }}</p>
+            <p><strong>Empleado: </strong> {{ AppointmentClient.Employee }}</p>
+            <p><strong>Comentario: </strong> {{ AppointmentClient.Comment }}</p>
+            <p *ngIf="AppointmentClient.PriorityService == true">
+              <strong>Servicio prioritario: </strong> Activo
+            </p>
+            <p *ngIf="AppointmentClient.Status !== ''">
+              <strong>Estado: </strong> {{ AppointmentClient.Status }}
+            </p>
+            <p>
+              <strong>Confirmacion: </strong>
+              {{
+                AppointmentClient.Confirm
+                  ? "Confirmado"
+                  : "Pendiente de confimacion"
+              }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="scroll-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Carro</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Horario</th>
+            <th scope="col">Servicio Prioritario</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Empleado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let AppointmentClient of tutorials">
+            <ng-container
+              *ngIf="
+                AppointmentClient.Status !== 'Completado' &&
+                AppointmentClient.Confirm == true
+              "
+            >
+              <tr>
+                <ng-container *ngFor="let Usuario of user">
+                  <ng-container *ngIf="AppointmentClient.UserID == Usuario._id">
+                    <td>
+                      <input
+                        type="checkbox"
+                        (click)="setActiveTutorial(AppointmentClient, Usuario)"
+                        data-bs-target="#modalStatus"
+                        data-bs-toggle="modal"
+                      />
+                    </td>
+                    <td>{{ Usuario.firstName }} {{ Usuario.lastName }}</td>
+                    <td>{{ Usuario.phoneNumber }}</td>
+                  </ng-container>
+                </ng-container>
+                <td>{{ AppointmentClient.Cars }}</td>
+                <td>{{ AppointmentClient.Service }}</td>
+                <td>{{ AppointmentClient.Schedule }}</td>
+                <td *ngIf="AppointmentClient.PriorityService == true">
+                  Activo
+                </td>
+                <td *ngIf="AppointmentClient.PriorityService != true">
+                  Inactivo
+                </td>
+                <td *ngIf="AppointmentClient.Status == ''">Confirmado</td>
+                <td *ngIf="AppointmentClient.Status !== ''">
+                  {{ AppointmentClient.Status }}
+                </td>
+                <td>{{ AppointmentClient.Employee }}</td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- FIN Sesion en progreso -->
+
+<!-- INICIO Sesion en completado -->
+<section>
+  <div data-aos="fade-up">
+    <div class="section-title">
+      <h2>Reservas Completadas</h2>
+    </div>
+
+    <!-- <div class="row">
+      <ng-container *ngFor="let AppointmentClient of tutorials">
+        <ng-container *ngIf="AppointmentClient.Status == 'Completado'">
+          <div class="col-md-6">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <ng-container
+                *ngFor="let Usuario of user"
+                (click)="setActiveTutorial(AppointmentClient, Usuario)"
+              >
+                <div *ngIf="AppointmentClient.UserID == Usuario._id">
+                  <h4>{{ Usuario.firstName }} {{ Usuario.lastName }}</h4>
+                  <p><strong>Cedula: </strong> {{ Usuario.idNumber }}</p>
+                  <p><strong>Telefono: </strong> {{ Usuario.phoneNumber }}</p>
+                  <p>
+                    <strong>Correo Electronico: </strong> {{ Usuario.email }}
+                  </p>
+                </div>
+              </ng-container>
+              <p><strong>Carro: </strong> {{ AppointmentClient.Cars }}</p>
+              <p><strong>Servicio: </strong> {{ AppointmentClient.Service }}</p>
+              <p><strong>Horario: </strong> {{ AppointmentClient.Schedule }}</p>
+              <p>
+                <strong>Ubicacion: </strong> {{ AppointmentClient.Location }}
+              </p>
+              <p>
+                <strong>Empleado: </strong> {{ AppointmentClient.Employee }}
+              </p>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div> -->
+
+    <div class="scroll-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Carro</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Horario</th>
+            <th scope="col">Empleado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let AppointmentClient of tutorials">
+            <ng-container *ngIf="AppointmentClient.Status == 'Completado'">
+              <tr>
+                <ng-container *ngFor="let Usuario of user">
+                  <ng-container *ngIf="AppointmentClient.UserID == Usuario._id">
+                    <td>
+                      <input
+                        type="checkbox"
+                        (click)="setActiveTutorial(AppointmentClient, Usuario)"
+                        data-bs-target="#modalView"
+                        data-bs-toggle="modal"
+                      />
+                    </td>
+                    <td>{{ Usuario.firstName }} {{ Usuario.lastName }}</td>
+                  </ng-container>
+                </ng-container>
+                <td>{{ AppointmentClient.Cars }}</td>
+                <td>{{ AppointmentClient.Service }}</td>
+                <td>{{ AppointmentClient.Schedule }}</td>
+                <td>{{ AppointmentClient.Employee }}</td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- FIN Sesion en completado -->
+
+<!-- INICIO Modal de confirmacion -->
+<div>
+  <div
+    class="modal fade"
+    id="modalConfirmation"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1"
+    (shown.bs.modal)="resetSelectedEmployee()"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+            <strong>Confimacion de Reservas</strong>
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="refreshWindow()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Detalles de la reserva:</strong></p>
+
+          <p *ngIf="currentAppointment.PriorityService == true">
+            <strong>Servicio Prioritario:</strong> Activo
+          </p>
+          <p>
+            <strong>Nombre completo:</strong> {{ currentUser.firstName }}
+            {{ currentUser.lastName }}
+          </p>
+          <p><strong>Cedula:</strong> {{ currentUser.idNumber }}</p>
+          <p><strong>Telefono:</strong> {{ currentUser.phoneNumber }}</p>
+          <p><strong>Correo:</strong> {{ currentUser.email }}</p>
+          <p><strong>Vehiculo:</strong> {{ currentAppointment.Cars }}</p>
+          <p><strong>Servicio:</strong> {{ currentAppointment.Service }}</p>
+          <p><strong>Horario:</strong> {{ currentAppointment.Schedule }}</p>
+          <p><strong>Ubicacion:</strong> {{ currentAppointment.Location }}</p>
+          <p><strong>Comentario:</strong> {{ currentAppointment.Comment }}</p>
+
+          <p><strong>Asignar un empleado:</strong></p>
+
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="selectedEmployee"
+          >
+            <option selected value="null">Seleccione:</option>
+            <option *ngFor="let emp of employee" [value]="emp.name">
+              {{ emp.name }}
+            </option>
+          </select>
+
+          <br />
+
+          <p>
+            Si desea confirmar la Reserva, presione <strong>Aceptar</strong>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-warning"
+            data-bs-target="#modalCancel"
+            data-bs-toggle="modal"
+          >
+            Cancelar Reserva
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+            (click)="refreshWindow()"
+          >
+            Cerrar
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            data-bs-target="#modalConfirmation2"
+            data-bs-toggle="modal"
+            (click)="updatePublished(true)"
+            [disabled]="selectedEmployee === 'null'"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="modalConfirmation2"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+            <strong>Confimacion de Reservas</strong>
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="refreshWindow()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          La Reserva fue confirmada, <strong>Exitosamente!</strong>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-outline-success"
+            data-bs-target="#exampleModalToggle"
+            data-bs-toggle="modal"
+            (click)="refreshWindow()"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN Modal de confirmacion -->
+
+<!-- INICIO Modal de estados -->
+<div>
+  <div
+    class="modal fade"
+    id="modalStatus"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+            <strong>Actualizar estado de la Reserva</strong>
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="refreshWindow()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Detalles de la reserva:</strong></p>
+
+          <p *ngIf="currentAppointment.PriorityService == true">
+            <strong>Servicio Prioritario:</strong> Activo
+          </p>
+          <p>
+            <strong>Nombre completo:</strong> {{ currentUser.firstName }}
+            {{ currentUser.lastName }}
+          </p>
+          <p><strong>Cedula:</strong> {{ currentUser.idNumber }}</p>
+          <p><strong>Telefono:</strong> {{ currentUser.phoneNumber }}</p>
+          <p><strong>Correo:</strong> {{ currentUser.email }}</p>
+          <p><strong>Vehiculo:</strong> {{ currentAppointment.Cars }}</p>
+          <p><strong>Servicio:</strong> {{ currentAppointment.Service }}</p>
+          <p><strong>Horario:</strong> {{ currentAppointment.Schedule }}</p>
+          <p><strong>Ubicacion:</strong> {{ currentAppointment.Location }}</p>
+          <p><strong>Comentario:</strong> {{ currentAppointment.Comment }}</p>
+          <p><strong>Estado:</strong> {{ currentAppointment.Status }}</p>
+          <p><strong>Empleado:</strong> {{ currentAppointment.Employee }}</p>
+
+          <p><strong>Actualizar el estado:</strong></p>
+
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="selectedOption"
+            style="width: 100%; border: 1px solid #ccc; margin-bottom: 10px"
+            required
+          >
+            <option value="" disabled selected>Seleccione:</option>
+            <option value="1">Recepcion</option>
+            <option value="2">En proceso</option>
+            <option value="3">Finalizado</option>
+          </select>
+          <p>
+            Si desea actualizar el estado de la reserva, presione
+            <strong>Aceptar</strong>
+          </p>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+            (click)="refreshWindow()"
+          >
+            Cancelar
+          </button>
+
+          <div *ngIf="selectedOption == '3'">
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              data-bs-target="#modalFactura"
+              data-bs-toggle="modal"
+              (click)="optionSelected()"
+            >
+              Cargar factura
+            </button>
+          </div>
+          <div *ngIf="selectedOption !== '3'">
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              data-bs-target="#modalStatus2"
+              data-bs-toggle="modal"
+              (click)="optionSelected()"
+              [disabled]="selectedOption == ''"
+            >
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    id="modalStatus2"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+            <strong>Actualizar estado de la Reserva</strong>
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="refreshWindow()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          El estado de la Reserva fue cambiado, <strong>Exitosamente!</strong>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-outline-success"
+            data-bs-target="#exampleModalToggle"
+            data-bs-toggle="modal"
+            (click)="refreshWindow()"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN Modal de estados -->
+
+<!-- INICIO Modal de ver -->
+<div>
+  <div
+    class="modal fade"
+    id="modalView"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+            <strong>Detalles de la Reserva</strong>
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="refreshWindow()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <strong>Nombre completo:</strong> {{ currentUser.firstName }}
+            {{ currentUser.lastName }}
+          </p>
+          <p><strong>Cedula:</strong> {{ currentUser.idNumber }}</p>
+          <p><strong>Telefono:</strong> {{ currentUser.phoneNumber }}</p>
+          <p><strong>Correo:</strong> {{ currentUser.email }}</p>
+          <p><strong>Vehiculo:</strong> {{ currentAppointment.Cars }}</p>
+          <p><strong>Servicio:</strong> {{ currentAppointment.Service }}</p>
+          <p><strong>Horario:</strong> {{ currentAppointment.Schedule }}</p>
+          <p><strong>Ubicacion:</strong> {{ currentAppointment.Location }}</p>
+          <p><strong>Comentario:</strong> {{ currentAppointment.Comment }}</p>
+          <p><strong>Empleado:</strong> {{ currentAppointment.Employee }}</p>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+            (click)="refreshWindow()"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN Modal de ver -->
+
+<!-- INICIO Modal de Cancelacion -->
+<div>
+  <div
+    class="modal fade"
+    id="modalCancel"
+    aria-hidden="true"
+    aria-labelledby="modalCancelToggleLabel"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">
+            <strong>Cancelacion de reserva</strong>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="refreshWindow()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            ¿Está seguro de que desea cancelar su reserva? Esta acción no se
+            puede deshacer.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button
+            class="btn btn-outline-success"
+            data-bs-target="#exampleModalToggle2"
+            data-bs-toggle="modal"
+            (click)="cancelAppointment()"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    id="exampleModalToggle2"
+    aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">
+            <strong>Cancelacion de reserva</strong>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="refreshWindow()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          {{ message }}
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+            (click)="refreshWindow()"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN Modal de Cancelacion -->
+
+<!-- INICIO Modal de Cancelacion -->
+<div>
+  <div
+    class="modal fade"
+    id="modalFactura"
+    aria-hidden="true"
+    aria-labelledby="modalCancelToggleLabel"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">
+            <strong>Cargar Factura de la Reserva</strong>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="refreshWindow()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="billAmount"> <strong>Monto a Pagar:</strong></label>
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="billAmount"
+                name="billAmount"
+                id="billAmount"
+                placeholder="Escriba el monto"
+              />
+            </div>
+            <br />
+            <div class="form-group">
+              <label for="billFile"><strong>Cargar Factura:</strong></label>
+
+              <div class="input-group">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="billFile"
+                  (change)="onFileChange($event)"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+            (click)="refreshWindow()"
+          >
+            Cancelar
+          </button>
+          <button
+            class="btn btn-outline-success"
+            (click)="saveBillDetails(); refreshWindow()"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN Modal de Cancelacion -->

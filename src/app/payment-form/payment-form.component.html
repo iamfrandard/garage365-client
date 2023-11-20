@@ -1,0 +1,30 @@
+<form (ngSubmit)="pay()" id="payment-form">
+  <div *ngIf="appointmentDetails" class="description">
+    <strong><h2>Detalles del Pago</h2></strong>
+    <h4><strong>Servicio:</strong> {{ appointmentDetails.Service }}</h4>
+    <h4>
+      <strong>Monto a Pagar:</strong> ${{ appointmentDetails.Bill.amount }}
+    </h4>
+  </div>
+  <div class="form-row">
+    <app-payment-cancel
+      *ngIf="paymentError"
+      [errorMessage]="errorMessage"
+    ></app-payment-cancel>
+    <strong
+      ><label for="card-element">Tarjeta de Crédito o Débito:</label></strong
+    >
+    <div id="card-element">
+      <ngx-stripe-card
+        #card
+        [options]="cardOptions"
+        [elementsOptions]="elementsOptions"
+      ></ngx-stripe-card>
+    </div>
+    <div id="card-errors" role="alert"></div>
+  </div>
+
+  <button type="submit" icon="pi pi-check" class="submit-btn">
+    Realizar Pago
+  </button>
+</form>

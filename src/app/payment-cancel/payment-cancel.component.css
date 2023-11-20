@@ -1,0 +1,59 @@
+.payment-error-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.animation-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  border: 12px solid red;
+  border-radius: 50%;
+  opacity: 0;
+  animation: fadeIn 1s forwards, expand 0.5s 1s forwards;
+}
+
+.cross {
+  position: absolute;
+  top: 48px;
+  left: 25px;
+  opacity: 0;
+  animation: fadeIn 1s 1.5s forwards;
+}
+
+.cross .line1,
+.cross .line2 {
+  position: absolute;
+  width: 50px;
+  height: 4px;
+  background-color: red;
+}
+
+.cross .line1 {
+  transform: rotate(45deg);
+}
+
+.cross .line2 {
+  transform: rotate(-45deg);
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes expand {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

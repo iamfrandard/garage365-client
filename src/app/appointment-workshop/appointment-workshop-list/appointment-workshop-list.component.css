@@ -1,0 +1,14 @@
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+
+.scroll-container {
+  overflow-y: auto;
+  max-height: 450px; /* Ajusta este valor según sea necesario */
+}
+
+.scroll-container {
+  overflow-x: auto;
+}

@@ -1,0 +1,32 @@
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+  type="text/css"
+  rel="stylesheet"
+/>
+<div class="chat-list-container">
+  <ul>
+    <li
+      *ngFor="let session of sessions"
+      [class.selected]="selectedSession === session?._id"
+      (click)="
+        selectSession(
+          session?._id,
+          session.userId?._id,
+          session.userId.firstName + ' ' + session.userId.lastName,
+          session.expertId?._id,
+          session.expertId?.WorkshopName
+        )
+      "
+    >
+      <div class="chat_img">
+        <img
+          src="https://ptetutorials.com/images/user-profile.png"
+          alt="taller"
+        />
+      </div>
+      <strong
+        >{{ session.userId.firstName }} {{ session.userId.lastName }}</strong
+      >
+    </li>
+  </ul>
+</div>

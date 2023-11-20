@@ -1,0 +1,77 @@
+<app-header></app-header>
+<br />
+<head>
+  <!-- ... otras dependencias ... -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <!-- Resumen de Citas -->
+    <div class="dashboard-card">
+      <div class="dashboard-title">
+        <h2>Resumen de Citas</h2>
+      </div>
+      <div class="appointment-summary">
+        <div class="summary-item">
+          <i class="fas fa-calendar-alt icon"></i>
+          <h4>Registradas</h4>
+          <p class="number">{{ totalAppointments }}</p>
+        </div>
+        <div class="summary-item">
+          <i class="fas fa-door-open icon"></i>
+          <h4>En Recepción</h4>
+          <p class="number">{{ appointmentStats["Recepcion"] || 0 }}</p>
+        </div>
+
+        <div class="summary-item">
+          <i class="fas fa-cogs icon"></i>
+          <h4>En Proceso</h4>
+          <p class="number">{{ appointmentStats["En Progreso"] || 0 }}</p>
+        </div>
+
+        <div class="summary-item">
+          <i class="fas fa-flag-checkered icon"></i>
+          <h4>Finalizadas</h4>
+          <p class="number">{{ appointmentStats["Finalizado"] || 0 }}</p>
+        </div>
+
+        <div class="summary-item">
+          <i class="fas fa-times-circle icon"></i>
+          <h4>Canceladas</h4>
+          <p class="number">{{ appointmentStats["Cancelada"] || 0 }}</p>
+        </div>
+
+        <div class="summary-item">
+          <i class="fas fa-check-circle icon"></i>
+          <h4>Completadas</h4>
+          <p class="number">{{ appointmentStats["Completado"] || 0 }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="dashboard-card">
+      <h3>Ingresos Mensuales Facturado</h3>
+      <p-chart type="bar" [data]="incomeStats"></p-chart>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>Servicios más Populares</h3>
+      <p-chart type="pie" [data]="popularServicesData"></p-chart>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>Tendencia de Citas</h3>
+      <p-chart type="bar" [data]="appointmentTrendData"></p-chart>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>Usuarios Atendidos por Mes</h3>
+      <p-chart type="bar" [data]="monthlyUserData"></p-chart>
+    </div>
+  </div>
+</body>

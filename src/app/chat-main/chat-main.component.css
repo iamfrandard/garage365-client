@@ -1,0 +1,28 @@
+.chat-container {
+  display: flex;
+  flex-direction: row;
+  height: 525px;;
+  background-color: whitesmoke;
+}
+
+app-chat-list {
+  flex: 12;
+  border-right: 0.5px solid #ccc;
+  display: flex;
+}
+
+app-chat-box {
+  flex: 25;
+}
+
+#header .logo a {
+  color: #111111;
+  }
+  
+  #header .logo a span {
+  color: #e03a3c;
+  }
+  
+  #header .logo img {
+  max-height: 40px;
+  }

@@ -1,0 +1,64 @@
+.dashboard-container {
+  margin-top: 7.5%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.dashboard-card {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  margin: 10px;
+}
+
+.dashboard-title h2 {
+  text-align: center; /* Centrar los títulos */
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333; /* Color más oscuro para los títulos */
+}
+
+.appointment-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.summary-item {
+  flex-basis: calc(50% - 20px);
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.summary-item .icon {
+  font-size: 24px;
+  color: #4a90e2; /* Ajusta según tu esquema de color */
+  margin-bottom: 5px;
+}
+
+.summary-item h4 {
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+.summary-item .number {
+  font-size: 22px;
+  font-weight: bold;
+  color: #4a90e2; /* Ajusta según tu esquema de color */
+}
+
+p-chart {
+  margin: auto;
+  max-width: 600px; /* Ajustar el tamaño máximo de los gráficos */
+}

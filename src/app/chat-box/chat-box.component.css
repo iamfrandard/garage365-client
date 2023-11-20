@@ -1,0 +1,210 @@
+.chat-container {
+  border: 2px solid #ddd;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+img {
+  max-width: 8%;
+}
+
+.sent-message {
+  background-color: #e6f7ff;
+
+  text-align: right;
+  margin-left: auto;
+  padding: 8px;
+}
+
+.received-message {
+  background-color: #f2f2f2;
+
+  text-align: left;
+  margin-right: auto;
+  padding: 8px;
+}
+
+/* Estilos para el área de mensajes (agregado por las modificaciones) */
+.message-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  margin-bottom: 10px;
+  height: 415px;
+  background-color: white;
+  flex-direction: column;
+  align-items: flex-end;
+
+  display: flex;
+}
+
+.time_date {
+  color: #747474;
+  color: #747474;
+  display: block;
+  font-size: 12px;
+  margin: 3px 0 0;
+}
+
+/* Estilos para el encabezado del chat */
+h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Estilos para cada mensaje */
+.message {
+  display: block;
+  /*max-width: 50%;*/
+
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12.5px;
+}
+
+.my-message {
+  background-color: #e6e6e6;
+  text-align: right;
+  padding: 5px;
+  margin-bottom: 8px;
+
+  align-self: flex-end;
+  text-align: right;
+}
+
+.other-message {
+  background-color: #f2f2f2;
+  padding: 5px;
+  margin-bottom: 8px;
+
+  text-align: left;
+  align-self: flex-start;
+}
+
+/* Estilos para el remitente del mensaje */
+.message strong {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Estilos para la marca de tiempo del mensaje */
+.timestamp {
+  font-size: 12px;
+  color: #999;
+  float: right;
+  margin-left: 15px;
+  margin-top: 3px;
+}
+
+.timestampU {
+  font-size: 12px;
+  color: #999;
+  float: left;
+  margin-right: 15px;
+  margin-top: 3px;
+}
+
+/* Estilos para el área de entrada de texto */
+textarea {
+  flex: 1;
+  padding: 1px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-top: 2px;
+  width: 100%;
+}
+
+/* Estilos para los botones */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 0.5px;
+}
+
+/* Estilos para el botón de enviar al pasar el mouse */
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos específicos para tus mensajes */
+.message.my-message {
+  background-color: #e6e6e6;
+  text-align: right;
+}
+
+/* Estilos específicos para mensajes del taller */
+.message.other-message {
+  background-color: #f2f2f2;
+}
+
+/* Cambio de colores según la clase adicional */
+.message.sent-message {
+  background-color: #e6f7ff;
+}
+
+.message.received-message {
+  background-color: #f2f2f2;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1px;
+  border: 1px solid #ddd;
+  background-color: #ddd;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .input-container {
+    position: fixed; /* Posición fija */
+    bottom: 0; /* Alineado en la parte inferior */
+    left: 0; /* Alineado a la izquierda */
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra para dar sensación de elevación */
+  }
+
+  .message-container {
+    margin-bottom: 0; /* Elimina el margen inferior ya que el input está fijo */
+  }
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+}
+
+.taller-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.taller-name {
+  flex-grow: 1;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.taller-status {
+  font-size: 12px;
+  color: #888;
+}
+
+.taller-status.online {
+  color: #4caf50; /* Color verde para indicar que está en línea */
+}

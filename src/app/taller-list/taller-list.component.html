@@ -1,0 +1,90 @@
+<app-header></app-header>
+
+<br />
+<br />
+<br />
+
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+  type="text/css"
+  rel="stylesheet"
+/>
+
+<div class="container" id="header">
+  <!-- buttons for chatrooms -->
+  <div class="chat-rooms mb-3 text-center">
+    <h1 class="logo">
+      <a>Chat de Expertos</a>
+    </h1>
+    <p style="font-weight: bold; color: #333">
+      <i class="fa fa-comments" aria-hidden="true"></i>
+      Seleccione el chat deseado
+    </p>
+  </div>
+  <div class="p-grid">
+    <!-- Lista de talleres -->
+    <div class="p-col-4">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div *ngFor="let taller of talleres">
+            <!-- Aquí es donde movimos la lógica del evento click -->
+            <div class="chat_list" (click)="iniciarChatConTaller(taller)">
+              <div class="chat_people">
+                <div class="chat_ib" style="color: #333">
+                  <h5 style="font-weight: bold">
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    {{ taller.WorkshopName }}
+                  </h5>
+                  <p style="margin-bottom: 10px">{{ taller.descripcion }}</p>
+
+                  <p style="font-weight: bold">Marcas certificadas:</p>
+                  <ul style="padding-left: 20px">
+                    <li *ngFor="let brand of taller.vehicleBrand">
+                      {{ brand.name }}
+                    </li>
+                  </ul>
+
+                  <p>
+                    <strong
+                      ><i class="fa fa-phone" aria-hidden="true"></i>
+                      Teléfono:</strong
+                    >
+                    {{ taller.phoneNumber }}
+                    <br />
+                    <strong
+                      ><i class="fa fa-envelope" aria-hidden="true"></i>
+                      Email:</strong
+                    >
+                    {{ taller.email }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Chat activo -->
+        <div class="p-col-8">
+          <div *ngIf="showChat && selectedTaller" class="chat-container">
+            <div class="chat-header">
+              <br />
+              <h5 class="taller-name">
+                <strong>{{ selectedTaller.WorkshopName }}</strong>
+              </h5>
+
+              <span class="taller-status" [class.online]="isOnline">
+                <i class="fa fa-circle" aria-hidden="true" *ngIf="isOnline"></i>
+                En línea
+              </span>
+              <br />
+            </div>
+            <app-taller-chat-box
+              (chatVisibilityChanged)="updateChatVisibility($event)"
+              [taller]="selectedTaller"
+            >
+            </app-taller-chat-box>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
