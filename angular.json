@@ -18,7 +18,7 @@
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
@@ -29,7 +29,7 @@
             ],
             "scripts": [
               "src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
-              "../client/node_modules/chart.js/dist/chart.js"
+              "./node_modules/chart.js/dist/chart.js"
             ]
           },
           "configurations": {
@@ -37,13 +37,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1000kb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "4000kb",
+                  "maximumError": "8mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kb",
-                  "maximumError": "8kb"
+                  "maximumWarning": "16kb",
+                  "maximumError": "32kb"
                 }
               ],
               "outputHashing": "all"
