@@ -1,5 +1,7 @@
 # Carpetas
 /node_modules
+.angular
+.vscode
 
 # Archivos
 package-lock.json
