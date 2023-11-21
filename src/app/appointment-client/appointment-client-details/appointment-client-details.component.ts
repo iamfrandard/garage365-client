@@ -84,7 +84,6 @@ export class AppointmentClientDetailsComponent {
     this.message = '';
     this.getTutorial(this.route.snapshot.params['id']);
     this.CurrentUser = this._StorageService.getUser().id;
-    console.log(this.CurrentUser)
     this.CurrentUser2 = this._StorageService.getUser().roles;
     this.workshopId = this.route.snapshot.params['id'];
     this.getCars();
@@ -219,7 +218,6 @@ export class AppointmentClientDetailsComponent {
     this._AppointmentClientService.getCars(this.CurrentUser).subscribe(
       (data) => {
         this.cars = data;
-        console.log(data);
       },
       (error) => {
         console.error('Error fetching reviews:', error);
@@ -258,7 +256,6 @@ export class AppointmentClientDetailsComponent {
     const year = nextDate.getFullYear();
   
     this.selectedDate = `${day}-${month}-${year}`;
-    console.log(this.selectedDate)
   }
   
 
