@@ -33,6 +33,11 @@ export class AppointmentClientListComponent {
   CurrentUser = '';
 
   ngOnInit(): void {
+    const currentUser2 = this._StorageService.getUser().roles;
+    if(currentUser2 == null)
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
     this.retrieveTutorials();
     this.CurrentUser = this._StorageService.getUser().id;
   }

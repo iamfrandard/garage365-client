@@ -26,7 +26,7 @@ export class ManagementServiceComponent {
 
   ngOnInit(): void {
     const currentUser2 = this.storageService.getUser().roles;
-    if(currentUser2 == 'ROLE_USER')
+    if(currentUser2 == 'ROLE_USER' || currentUser2 == null)
     {
       setTimeout(() => {this.router.navigate(['/inicio']);});
     }

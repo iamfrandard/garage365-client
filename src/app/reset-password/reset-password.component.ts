@@ -26,8 +26,8 @@ export class ResetPasswordComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const currentUser = this.storageService.getUser().roles;
-    if(currentUser == 'ROLE_USER' && currentUser == 'ROLE_MODERATOR')
+    const currentUser2 = this.storageService.getUser().roles;
+    if(currentUser2 == 'ROLE_USER' || currentUser2 == 'ROLE_MODERATOR' || currentUser2 == null)
     {
       setTimeout(() => {this.router.navigate(['/inicio']);});
     }

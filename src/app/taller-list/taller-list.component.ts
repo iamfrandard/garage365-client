@@ -34,8 +34,8 @@ export class TallerListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const currentUser = this.storageService.getUser().roles;
-    if(currentUser == 'ROLE_MODERATOR')
+    const currentUser2 = this.storageService.getUser().roles;
+    if(currentUser2 == 'ROLE_MODERATOR' || currentUser2 == null) 
     {
       setTimeout(() => {this.router.navigate(['/inicio']);});
     }

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ChatMessage, SocketService } from '../services/socket.service';
 import { StorageServiceComponent } from '../services/storage.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-list',
@@ -24,10 +25,17 @@ export class ChatListComponent implements OnInit {
   constructor(
     private socketService: SocketService,
     private storageService: StorageServiceComponent,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    const currentUser2 = this.storageService.getUser().roles;
+    if(currentUser2 == null)
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+
     const user = this.storageService.getUser();
     this.userId = user?.id;
     this.loadSessions();

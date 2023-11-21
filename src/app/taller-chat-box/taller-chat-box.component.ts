@@ -14,6 +14,7 @@ import { UserService, ChatSession } from '../services/user.service';
 import { StorageServiceComponent } from '../services/storage.service';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-taller-chat-box',
@@ -66,11 +67,17 @@ export class TallerChatBoxComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private messageService: MessageService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    // Asignar lógica para escuchar los mensajes entrantes
+    const currentUser2 = this.storageService.getUser().roles;
+    if(currentUser2 == null)
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+
     this.socketService.getMessages().subscribe((message: ChatMessage) => {
       const storedUser = this.storageService.getUser();
       if (message.tallerId !== this.id && message.sender !== this.id) {

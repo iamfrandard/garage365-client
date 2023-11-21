@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Appointment } from 'src/app/models/appointment.model';
-//import { Search } from 'src/app/models/search.model';
 import { AppointmentClientService } from 'src/app/services/appointmentClient.service';
 import { SearchServiceComponent } from 'src/app/services/search.service';
 import { StorageServiceComponent } from 'src/app/services/storage.service';
@@ -66,7 +65,8 @@ export class AppointmentClientDetailsComponent {
     private _AppointmentClientService: AppointmentClientService,
     private _SearchService: SearchServiceComponent,
     private route: ActivatedRoute,
-    private _StorageService: StorageServiceComponent
+    private _StorageService: StorageServiceComponent,
+    private router: Router
   ) {}
 
   direcciones: any[] = [];
@@ -76,6 +76,11 @@ export class AppointmentClientDetailsComponent {
   Role = 'ROLE_USER';
 
   ngOnInit(): void {
+    const currentUser2 = this._StorageService.getUser().roles;
+    if(currentUser2 == null)
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
     this.message = '';
     this.getTutorial(this.route.snapshot.params['id']);
     this.CurrentUser = this._StorageService.getUser().id;

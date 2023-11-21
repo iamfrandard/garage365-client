@@ -11,6 +11,7 @@ import { SocketService, ChatMessage } from '../services/socket.service';
 import { StorageServiceComponent } from '../services/storage.service';
 import { MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-box',
@@ -52,10 +53,16 @@ export class ChatBoxComponent implements OnInit, OnChanges {
     private socketService: SocketService,
     private storageService: StorageServiceComponent,
     private messageService: MessageService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    const currentUser2 = this.storageService.getUser().roles;
+    if(currentUser2 == null)
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
     // Escucha los mensajes entrantes desde el servidor Socket.io
     this.socketService.getMessages().subscribe((message: ChatMessage) => {
       // Solo agregamos mensajes de la sesión activa

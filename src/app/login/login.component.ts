@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUser2 = this.storageService.getUser().roles;
-    if(currentUser2 == 'ROLE_USER' && currentUser2 == 'ROLE_MODERATOR')
+    if(currentUser2 == 'ROLE_USER' || currentUser2 == 'ROLE_MODERATOR' || currentUser2 == null)
     {
       setTimeout(() => {this.router.navigate(['/inicio']);});
     }

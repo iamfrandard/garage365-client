@@ -8,6 +8,7 @@ import {
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentClientService } from 'src/app/services/appointmentClient.service';
+import { StorageServiceComponent } from '../services/storage.service';
 
 interface AppointmentBill {
   amount: string;
@@ -71,10 +72,17 @@ export class PaymentFormComponent implements OnInit {
     private fb: FormBuilder,
     private stripeService: StripeService,
     private router: Router,
-    private _AppointmentClientService: AppointmentClientService
+    private _AppointmentClientService: AppointmentClientService,
+    private storageService: StorageServiceComponent
   ) {}
 
   ngOnInit(): void {
+    const currentUser2 = this.storageService.getUser().roles;
+    if(currentUser2 == null)
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+    
     this.appointmentId = this.getAppointmentId();
     if (this.appointmentId) {
       this.fetchAppointmentDetails(this.appointmentId);

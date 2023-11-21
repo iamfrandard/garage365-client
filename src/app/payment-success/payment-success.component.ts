@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageServiceComponent } from '../services/storage.service';
 
 @Component({
   selector: 'app-payment-success',
@@ -7,9 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./payment-success.component.css'],
 })
 export class PaymentSuccessComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private storageService: StorageServiceComponent) {}
 
   ngOnInit(): void {
+    const currentUser2 = this.storageService.getUser().roles;
+    if(currentUser2 == null)
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
     setTimeout(() => {
       this.router.navigate(['/perfil']);
     }, 5000);
