@@ -5,6 +5,8 @@ import _carBrands from '../register/Brands.json';
 import datos from '../register/Location.json';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { StorageServiceComponent } from '../services/storage.service';
+
 interface Province {
   name: string;
   value: Municipality[];
@@ -97,10 +99,17 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private storageService: StorageServiceComponent
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const currentUser2 = this.storageService.getUser().roles;
+    if(currentUser2 == 'ROLE_USER' && currentUser2 == 'ROLE_MODERATOR')
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+  }
 
   SelectedType: string = '';
   selectedBrand: string = '';

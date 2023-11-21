@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environments';
 import { MessageService } from 'primeng/api';
+import { StorageServiceComponent } from '../services/storage.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -20,10 +21,17 @@ export class ResetPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private storageService: StorageServiceComponent
   ) {}
 
   ngOnInit() {
+    const currentUser = this.storageService.getUser().roles;
+    if(currentUser == 'ROLE_USER' && currentUser == 'ROLE_MODERATOR')
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+    
     this.userId = this.route.snapshot.paramMap.get('id') || '';
   }
 

@@ -3,6 +3,8 @@ import { AuthService } from '../services/auth.service';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { StorageServiceComponent } from '../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recover-password',
@@ -24,10 +26,18 @@ export class RecoverPasswordComponent {
   constructor(
     private authService: AuthService,
     private messageService: MessageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private storageService: StorageServiceComponent,
+    private router: Router
   ) {}
 
   onSubmit(event: Event) {
+    const currentUser = this.storageService.getUser().roles;
+    if(currentUser == 'ROLE_USER' && currentUser == 'ROLE_MODERATOR')
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+    
     event.preventDefault();
     const emailValue = this.email;
 

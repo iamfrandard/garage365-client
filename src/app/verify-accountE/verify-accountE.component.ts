@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { StorageServiceComponent } from '../services/storage.service';
 
 @Component({
   selector: 'app-verify-accountE',
@@ -16,7 +17,8 @@ export class VerifyAccountEComponent implements OnInit {
   (
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storageService: StorageServiceComponent
   ) 
   {
     this.animateProgressBar();
@@ -24,6 +26,12 @@ export class VerifyAccountEComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const currentUser2 = this.storageService.getUser().roles;
+    if(currentUser2 == 'ROLE_USER' && currentUser2 == 'ROLE_MODERATOR')
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+    
     this.authService.verifyAccountE(this.id).subscribe(
       response => {
         if (response.message === "Verificado") {
