@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { StorageServiceComponent } from '../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'management-schedule',
@@ -28,9 +29,16 @@ export class ManagementScheduleComponent {
   (
     private authService: AuthService,
     private storageService: StorageServiceComponent,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
+    const currentUser2 = this.storageService.getUser().roles;
+    if(currentUser2 == 'ROLE_USER')
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+
     this.currentUser = this.storageService.getUser().id;
     this.getAllSchedule();
   }

@@ -29,6 +29,12 @@ export class DashboardReportComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const currentUser = this.storageService.getUser().roles;
+    if(currentUser == 'ROLE_USER')
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+    
     const user = this.storageService.getUser();
     this.workshopId = user?.id;
     if (this.workshopId) {

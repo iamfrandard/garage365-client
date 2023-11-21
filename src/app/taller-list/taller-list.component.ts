@@ -34,6 +34,12 @@ export class TallerListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const currentUser = this.storageService.getUser().roles;
+    if(currentUser == 'ROLE_MODERATOR')
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+    
     this.searchService.getAll().subscribe(
       (talleres) => {
         this.talleres = talleres;
