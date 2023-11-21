@@ -169,8 +169,6 @@ export class AppointmentClientDetailsComponent {
       Cars: this._Cars,
     };
 
-    console.log(data)
-
     this.Alert = true;
 
     this._AppointmentClientService.create(data).subscribe({
