@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageServiceComponent } from '../services/storage.service';
 
 @Component({
   selector: 'app-chat-main',
@@ -15,7 +16,15 @@ export class ChatMainComponent {
     expertName: string;
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private storageService: StorageServiceComponent) {}
+
+  ngOnInit(): void {
+    const currentUser = this.storageService.getUser().roles;
+    if(currentUser == 'ROLE_USER')
+    {
+      setTimeout(() => {this.router.navigate(['/inicio']);});
+    }
+  }
 
   handleSessionChange(data: {
     sessionId: string;
