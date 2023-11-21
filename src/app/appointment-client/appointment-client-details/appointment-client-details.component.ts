@@ -220,6 +220,7 @@ export class AppointmentClientDetailsComponent {
     this._AppointmentClientService.getCars(this.CurrentUser).subscribe(
       (data) => {
         this.cars = data;
+        console.log(data);
       },
       (error) => {
         console.error('Error fetching reviews:', error);

@@ -47,13 +47,13 @@ export class LoginComponent implements OnInit {
         this.storageService.saveUser(data);
         this.messageService.add({
           severity: 'success',
-          summary: 'Login Succesfull',
+          summary: 'Exitosamente',
           detail: 'Bienvenido a Garage365',
         });
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
-        this.router.navigate(['/perfil']);
+        this.router.navigate(['/reserva']);
       },
       error: (err) => {
         this.errorMessage = err.error.message;
