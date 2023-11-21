@@ -33,7 +33,7 @@ export class RecoverPasswordComponent {
 
   onSubmit(event: Event) {
     const currentUser2 = this.storageService.getUser().roles;
-    if(currentUser2 == 'ROLE_USER' || currentUser2 == 'ROLE_MODERATOR' || currentUser2 == null)
+    if(currentUser2 == 'ROLE_USER' || currentUser2 == 'ROLE_MODERATOR')
     {
       setTimeout(() => {this.router.navigate(['/inicio']);});
     }
