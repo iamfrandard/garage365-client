@@ -84,6 +84,7 @@ export class AppointmentClientDetailsComponent {
     this.message = '';
     this.getTutorial(this.route.snapshot.params['id']);
     this.CurrentUser = this._StorageService.getUser().id;
+    console.log(this.CurrentUser)
     this.CurrentUser2 = this._StorageService.getUser().roles;
     this.workshopId = this.route.snapshot.params['id'];
     this.getCars();
