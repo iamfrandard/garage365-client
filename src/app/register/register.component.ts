@@ -40,6 +40,7 @@ interface Location {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
+
 export class RegisterComponent implements OnInit {
   form: any = {
     inputName: null,
