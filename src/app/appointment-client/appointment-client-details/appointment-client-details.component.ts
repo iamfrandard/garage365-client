@@ -220,6 +220,7 @@ export class AppointmentClientDetailsComponent {
     this._AppointmentClientService.getCars(this.CurrentUser).subscribe(
       (data) => {
         this.cars = data;
+        console.log(this.CurrentUser);
         console.log(data);
       },
       (error) => {
