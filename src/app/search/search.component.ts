@@ -24,11 +24,10 @@ export class SearchComponent {
   noResults: boolean = false;
   loading = false;
 
-  // Paginación
-  totalWorkshops = 0; // Total de talleres
-  workshopsPerPage = 4; // Talleres por página
-  currentPage = 1; // Página actual
-  totalPages = 0; // Total de páginas
+  totalWorkshops = 0;
+  workshopsPerPage = 4;
+  currentPage = 1;
+  totalPages = 0;
 
   constructor(
     private tutorialService: SearchServiceComponent,
@@ -183,7 +182,6 @@ export class SearchComponent {
     });
   }
 
-  // Navegación de paginación
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;

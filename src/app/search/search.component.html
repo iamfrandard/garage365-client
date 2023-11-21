@@ -54,7 +54,7 @@
   <div class="row" *ngIf="!loading && workshops.length > 0">
     <div
       class="card"
-      [routerLink]="['/appointment/', workshop._id]"
+      [routerLink]="['/reservas/', workshop._id]"
       *ngFor="let workshop of workshops; let i = index"
       (click)="setActiveTutorial(workshop, i)"
     >

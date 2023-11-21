@@ -1,9 +1,3 @@
-/*.card-body {
-  text-align: left;
-  max-width: 750px;
-  margin: auto;
-}*/
-
 .no-results {
   display: flex;
   justify-content: center;
@@ -24,7 +18,6 @@
   border-radius: 4px;
 }
 
-/* Estilos generales */
 .filter-container {
   display: flex;
   align-items: center;
@@ -204,8 +197,6 @@
 .portfolio-info {
   pointer-events: none;
 }
-
-/*paginacion*/
 
 .pagination {
   display: flex;

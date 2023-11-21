@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'chat-de-usuarios', component: ChatMainComponent },
   { path: 'busqueda', component: SearchComponent },
   { path: 'tutorials', component: AppointmentClientListComponent },
-  { path: 'appointment/:id', component: AppointmentClientDetailsComponent },
+  { path: 'reservas/:id', component: AppointmentClientDetailsComponent },
   { path: 'taller/empleados', component: ManagementEmployeeComponent },
   { path: '/taller/horarios', component: ManagementScheduleComponent },
   { path: '/taller/servicios', component: ManagementServiceComponent },
