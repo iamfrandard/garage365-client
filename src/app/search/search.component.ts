@@ -167,7 +167,6 @@ export class SearchComponent {
     this.tutorialService.getAllBrands().subscribe({
       next: (data) => {
         this.brands = data;
-        console.log(data);
       },
       error: (e) => console.error(e),
     });
