@@ -19,7 +19,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let AppointmentClient of tutorials">
+          <ng-container *ngFor="let AppointmentClient of appointment1">
             <ng-container
               *ngIf="
                 AppointmentClient.Status !== 'Completado' &&
@@ -84,7 +84,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let AppointmentClient of tutorials">
+          <ng-container *ngFor="let AppointmentClient of appointment2">
             <ng-container
               *ngIf="
                 AppointmentClient.Status !== 'Completado' &&
@@ -150,7 +150,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let AppointmentClient of tutorials">
+          <ng-container *ngFor="let AppointmentClient of appointment3">
             <ng-container *ngIf="AppointmentClient.Status == 'Completado'">
               <tr>
                 <ng-container *ngFor="let Usuario of user">
