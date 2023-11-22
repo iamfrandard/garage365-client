@@ -49,18 +49,12 @@
 
     <div class="row">
       <div
+        class="col-sm-12 col-md-6 col-lg-4"
         *ngFor="let tutorial of appointment2; let i = index"
         [class.active]="i == currentIndex"
         (click)="setActiveTutorial(tutorial, i)"
       >
-        <div
-          class="icon-box col-md-6"
-          data-aos="fade-up"
-          data-aos-delay="100"
-          data-bs-toggle="modal"
-          [attr.data-bs-toggle]="tutorial.Confirm ? null : 'modal'"
-          data-bs-target="#modalCancel"
-        >
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
           <i class="bi bi-card-checklist"></i>
           <h4>{{ tutorial.Workshop }}</h4>
           <p><strong>Horario: </strong> {{ tutorial.Schedule }}</p>
