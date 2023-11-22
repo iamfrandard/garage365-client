@@ -3,6 +3,7 @@ import { Appointment } from 'src/app/models/appointment.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { AppointmentClientService } from 'src/app/services/appointmentClient.service';
 import { AppointmentWorkshopService } from 'src/app/services/appointmentWorkshop.service';
+import { StorageServiceComponent } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-appointment-workshop-list',
@@ -34,6 +35,7 @@ export class AppointmentWorkshopListComponent {
   appointment1?: Appointment[];
   appointment2?: Appointment[];
   appointment3?: Appointment[];
+  
   user?: Usuario[];
   currentAppointment: Appointment = {};
   currentUser: Usuario = {};
@@ -45,13 +47,18 @@ export class AppointmentWorkshopListComponent {
   fechaFormatoISO: string = this.fechaActual.toISOString();
   
   message = '';
+
+  CurrentUser: any = '';
   
   constructor(
+    private storageService: StorageServiceComponent,
     private _AppointmentWorkshopService: AppointmentWorkshopService,
     private _AppointmentClientService: AppointmentClientService
   ) {}
 
   ngOnInit(): void {
+    const user = this.storageService.getUser();
+    this.CurrentUser = user.email;
     this.retrieveTutorials();
   }
 
@@ -120,6 +127,7 @@ export class AppointmentWorkshopListComponent {
         console.log(data)
         this.tutorials = data.appointments;
         this.user = data.user;
+        this.tutorials = this.tutorials.filter(tutorial => tutorial.Workshop == this.CurrentUser && tutorial.Status !== 'Cancelada');
         this.appointment1
         this.appointment2
         this.appointment3
