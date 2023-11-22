@@ -671,7 +671,7 @@
           </button>
           <button
             class="btn btn-outline-success"
-            [disabled]="billAmount == 0 && billFile == null"
+            [disabled]="billAmount == 0 && billFile == 'null'"
             (click)="saveBillDetails(); refreshWindow()"
           >
             Aceptar
