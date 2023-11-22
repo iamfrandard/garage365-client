@@ -11,7 +11,7 @@ import { AppointmentWorkshopService } from 'src/app/services/appointmentWorkshop
 })
 export class AppointmentWorkshopListComponent {
   @ViewChild('billingModal', { static: true }) billingModalContent: any;
-  billAmount: number = 0;
+  billAmount: any = null;
   billFile: any = null;
   @Input() Appointment: Appointment = {
     UserID: '',
