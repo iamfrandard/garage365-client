@@ -53,55 +53,86 @@
         [class.active]="i == currentIndex"
         (click)="setActiveTutorial(tutorial, i)"
       >
-        <div class="col-md-6">
-          <div
-            class="icon-box"
-            data-aos="fade-up"
-            data-aos-delay="100"
-            data-bs-toggle="modal"
-            [attr.data-bs-toggle]="tutorial.Confirm ? null : 'modal'"
-            data-bs-target="#modalCancel"
-          >
-            <i class="bi bi-card-checklist"></i>
-            <h4>{{ tutorial.Workshop }}</h4>
-            <p><strong>Horario: </strong> {{ tutorial.Schedule }}</p>
-            <p><strong>Ubicacion: </strong> {{ tutorial.Location }}</p>
-            <p><strong>Servicio: </strong> {{ tutorial.Service }}</p>
-            <p><strong>Comentarios: </strong> {{ tutorial.Comment }}</p>
-            <p><strong>Empleado: </strong> {{ tutorial.Employee }}</p>
-            <p *ngIf="tutorial.PriorityService == true">
-              <strong>Servicio prioritario: </strong> Activo
-            </p>
-            <p *ngIf="tutorial.Status !== ''">
-              <strong>Estado: </strong> {{ tutorial.Status }}
-            </p>
-            <p *ngIf="tutorial.Status == ''">
-              <strong>Confirmacion: </strong>
-              {{ tutorial.Confirm ? "Aceptado" : "Pendiente de aceptacion" }}
-            </p>
+        <div
+          class="icon-box col-md-6"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          data-bs-toggle="modal"
+          [attr.data-bs-toggle]="tutorial.Confirm ? null : 'modal'"
+          data-bs-target="#modalCancel"
+        >
+          <i class="bi bi-card-checklist"></i>
+          <h4>{{ tutorial.Workshop }}</h4>
+          <p><strong>Horario: </strong> {{ tutorial.Schedule }}</p>
+          <p><strong>Ubicacion: </strong> {{ tutorial.Location }}</p>
+          <p><strong>Servicio: </strong> {{ tutorial.Service }}</p>
+          <p><strong>Comentarios: </strong> {{ tutorial.Comment }}</p>
+          <p><strong>Empleado: </strong> {{ tutorial.Employee }}</p>
+          <p *ngIf="tutorial.PriorityService == true">
+            <strong>Servicio prioritario: </strong> Activo
+          </p>
+          <p *ngIf="tutorial.Status !== ''">
+            <strong>Estado: </strong> {{ tutorial.Status }}
+          </p>
+          <p *ngIf="tutorial.Status == ''">
+            <strong>Confirmacion: </strong>
+            {{ tutorial.Confirm ? "Aceptado" : "Pendiente de aceptacion" }}
+          </p>
 
-            <div
-              class="d-flex justify-content-center"
-              *ngIf="tutorial.Status == 'Finalizado'"
+          <div
+            class="d-flex justify-content-center"
+            *ngIf="tutorial.Status == 'Finalizado'"
+          >
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="redirectToStripe(tutorial.id)"
             >
-              <button
-                type="button"
-                class="btn btn-success"
-                (click)="redirectToStripe(tutorial.id)"
-              >
-                Pagar Ahora
-              </button>
-              <br />
-              <br />
+              Pagar Ahora
+            </button>
+            <br />
+            <br />
+          </div>
+
+          <br />
+          <br />
+          <br />
+
+          <div
+            class="progress-container"
+            *ngIf="tutorial.Status == Estado3; else condicion2Block"
+          >
+            <div class="progress-icons">
+              <div class="icon-container">
+                <i class="bi bi-mailbox2 completed"></i>
+                <span>Recepción</span>
+              </div>
+              <div class="icon-container">
+                <i class="bi bi-hourglass-split completed"></i>
+                <span>En progreso</span>
+              </div>
+              <div class="icon-container">
+                <i class="bi bi-car-front-fill completed"></i>
+                <span>Finalizado</span>
+              </div>
             </div>
 
-            <br />
-            <br />
-            <br />
+            <div
+              class="progress"
+              role="progressbar"
+              aria-label="Basic example"
+              aria-valuenow="75"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <div class="progress-bar bg-danger w-100"></div>
+            </div>
+          </div>
 
+          <ng-template #condicion2Block>
             <div
               class="progress-container"
-              *ngIf="tutorial.Status == Estado3; else condicion2Block"
+              *ngIf="tutorial.Status == Estado2; else condicion3Block"
             >
               <div class="progress-icons">
                 <div class="icon-container">
@@ -113,7 +144,7 @@
                   <span>En progreso</span>
                 </div>
                 <div class="icon-container">
-                  <i class="bi bi-car-front-fill completed"></i>
+                  <i class="bi bi-car-front-fill pending"></i>
                   <span>Finalizado</span>
                 </div>
               </div>
@@ -126,106 +157,73 @@
                 aria-valuemin="0"
                 aria-valuemax="100"
               >
-                <div class="progress-bar bg-danger w-100"></div>
+                <div class="progress-bar bg-danger w-75"></div>
               </div>
             </div>
+          </ng-template>
 
-            <ng-template #condicion2Block>
+          <ng-template #condicion3Block>
+            <div
+              class="progress-container"
+              *ngIf="tutorial.Status == Estado1; else elseBlock"
+            >
+              <div class="progress-icons">
+                <div class="icon-container">
+                  <i class="bi bi-mailbox2 completed"></i>
+                  <span>Recepción</span>
+                </div>
+                <div class="icon-container">
+                  <i class="bi bi-hourglass-split pending"></i>
+                  <span>En progreso</span>
+                </div>
+                <div class="icon-container">
+                  <i class="bi bi-car-front-fill pending"></i>
+                  <span>Finalizado</span>
+                </div>
+              </div>
+
               <div
-                class="progress-container"
-                *ngIf="tutorial.Status == Estado2; else condicion3Block"
+                class="progress"
+                role="progressbar"
+                aria-label="Basic example"
+                aria-valuenow="75"
+                aria-valuemin="0"
+                aria-valuemax="100"
               >
-                <div class="progress-icons">
-                  <div class="icon-container">
-                    <i class="bi bi-mailbox2 completed"></i>
-                    <span>Recepción</span>
-                  </div>
-                  <div class="icon-container">
-                    <i class="bi bi-hourglass-split completed"></i>
-                    <span>En progreso</span>
-                  </div>
-                  <div class="icon-container">
-                    <i class="bi bi-car-front-fill pending"></i>
-                    <span>Finalizado</span>
-                  </div>
-                </div>
+                <div class="progress-bar bg-danger w-25"></div>
+              </div>
+            </div>
+          </ng-template>
 
-                <div
-                  class="progress"
-                  role="progressbar"
-                  aria-label="Basic example"
-                  aria-valuenow="75"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  <div class="progress-bar bg-danger w-75"></div>
+          <ng-template #elseBlock>
+            <div class="progress-container">
+              <div class="progress-icons">
+                <div class="icon-container">
+                  <i class="bi bi-mailbox2 pending"></i>
+                  <span>Recepción</span>
+                </div>
+                <div class="icon-container">
+                  <i class="bi bi-hourglass-split pending"></i>
+                  <span>En progreso</span>
+                </div>
+                <div class="icon-container">
+                  <i class="bi bi-car-front-fill pending"></i>
+                  <span>Finalizado</span>
                 </div>
               </div>
-            </ng-template>
 
-            <ng-template #condicion3Block>
               <div
-                class="progress-container"
-                *ngIf="tutorial.Status == Estado1; else elseBlock"
+                class="progress"
+                role="progressbar"
+                aria-label="Basic example"
+                aria-valuenow="75"
+                aria-valuemin="0"
+                aria-valuemax="100"
               >
-                <div class="progress-icons">
-                  <div class="icon-container">
-                    <i class="bi bi-mailbox2 completed"></i>
-                    <span>Recepción</span>
-                  </div>
-                  <div class="icon-container">
-                    <i class="bi bi-hourglass-split pending"></i>
-                    <span>En progreso</span>
-                  </div>
-                  <div class="icon-container">
-                    <i class="bi bi-car-front-fill pending"></i>
-                    <span>Finalizado</span>
-                  </div>
-                </div>
-
-                <div
-                  class="progress"
-                  role="progressbar"
-                  aria-label="Basic example"
-                  aria-valuenow="75"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  <div class="progress-bar bg-danger w-25"></div>
-                </div>
+                <div class="progress-bar bg-danger w-0"></div>
               </div>
-            </ng-template>
-
-            <ng-template #elseBlock>
-              <div class="progress-container">
-                <div class="progress-icons">
-                  <div class="icon-container">
-                    <i class="bi bi-mailbox2 pending"></i>
-                    <span>Recepción</span>
-                  </div>
-                  <div class="icon-container">
-                    <i class="bi bi-hourglass-split pending"></i>
-                    <span>En progreso</span>
-                  </div>
-                  <div class="icon-container">
-                    <i class="bi bi-car-front-fill pending"></i>
-                    <span>Finalizado</span>
-                  </div>
-                </div>
-
-                <div
-                  class="progress"
-                  role="progressbar"
-                  aria-label="Basic example"
-                  aria-valuenow="75"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  <div class="progress-bar bg-danger w-0"></div>
-                </div>
-              </div>
-            </ng-template>
-          </div>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
