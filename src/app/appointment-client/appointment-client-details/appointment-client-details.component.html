@@ -67,7 +67,10 @@
                 </span>
               </li>
               <li><strong>Correo</strong>: {{ Workshop?.email }}</li>
-              <li><strong>Telefono</strong>: {{ Workshop?.phoneNumber }}</li>
+              <li>
+                <strong>Telefono</strong>:
+                {{ formatPhoneNumber(Workshop?.phoneNumber) }}
+              </li>
             </ul>
           </div>
 

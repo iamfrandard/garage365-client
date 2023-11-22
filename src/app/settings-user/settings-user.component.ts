@@ -154,7 +154,7 @@ export class SettingsUserComponent implements OnInit {
     if (match) {
       return '(' + match[1] + ') ' + match[2] + '-' + match[3];
     }
-    return phoneNumber;  // o simplemente return "";
+    return phoneNumber;
   }
 
   formatIdNumber(idNumber: string): string {
@@ -164,6 +164,6 @@ export class SettingsUserComponent implements OnInit {
     if (match) {
       return match[1] + '-' + match[2] + '-' + match[3];
     }
-    return idNumber;  // o simplemente return "";
+    return idNumber;
   }  
 }
