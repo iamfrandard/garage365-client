@@ -103,10 +103,13 @@
                 </p>
 
                 <!-- Botón para pagar que solo aparece si el estado es 'Finalizado' -->
-                <div *ngIf="tutorial.Status == 'Finalizado'">
+                <div
+                  class="d-flex justify-content-center"
+                  *ngIf="tutorial.Status == 'Finalizado'"
+                >
                   <button
                     type="button"
-                    class="btn btn-success text-center"
+                    class="btn btn-success"
                     (click)="redirectToStripe(tutorial.id)"
                   >
                     Pagar Ahora
