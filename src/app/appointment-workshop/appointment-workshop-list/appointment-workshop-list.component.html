@@ -39,7 +39,7 @@
                       />
                     </td>
                     <td>{{ Usuario.firstName }} {{ Usuario.lastName }}</td>
-                    <td>{{ Usuario.phoneNumber }}</td>
+                    <td>{{ formatPhoneNumber(Usuario.phoneNumber) }}</td>
                   </ng-container>
                 </ng-container>
                 <td>{{ AppointmentClient.Cars }}</td>
@@ -103,7 +103,7 @@
                       />
                     </td>
                     <td>{{ Usuario.firstName }} {{ Usuario.lastName }}</td>
-                    <td>{{ Usuario.phoneNumber }}</td>
+                    <td>{{ formatPhoneNumber(Usuario.phoneNumber) }}</td>
                   </ng-container>
                 </ng-container>
                 <td>{{ AppointmentClient.Cars }}</td>
@@ -216,8 +216,13 @@
             <strong>Nombre completo:</strong> {{ currentUser.firstName }}
             {{ currentUser.lastName }}
           </p>
-          <p><strong>Cedula:</strong> {{ currentUser.idNumber }}</p>
-          <p><strong>Telefono:</strong> {{ currentUser.phoneNumber }}</p>
+          <p>
+            <strong>Cedula:</strong> {{ formatIdNumber(currentUser.idNumber) }}
+          </p>
+          <p>
+            <strong>Telefono:</strong>
+            {{ formatPhoneNumber(currentUser.phoneNumber) }}
+          </p>
           <p><strong>Correo:</strong> {{ currentUser.email }}</p>
           <p><strong>Vehiculo:</strong> {{ currentAppointment.Cars }}</p>
           <p><strong>Servicio:</strong> {{ currentAppointment.Service }}</p>
@@ -353,8 +358,13 @@
             <strong>Nombre completo:</strong> {{ currentUser.firstName }}
             {{ currentUser.lastName }}
           </p>
-          <p><strong>Cedula:</strong> {{ currentUser.idNumber }}</p>
-          <p><strong>Telefono:</strong> {{ currentUser.phoneNumber }}</p>
+          <p>
+            <strong>Cedula:</strong> {{ formatIdNumber(currentUser.idNumber) }}
+          </p>
+          <p>
+            <strong>Telefono:</strong>
+            {{ formatPhoneNumber(currentUser.phoneNumber) }}
+          </p>
           <p><strong>Correo:</strong> {{ currentUser.email }}</p>
           <p><strong>Vehiculo:</strong> {{ currentAppointment.Cars }}</p>
           <p><strong>Servicio:</strong> {{ currentAppointment.Service }}</p>
@@ -493,8 +503,13 @@
             <strong>Nombre completo:</strong> {{ currentUser.firstName }}
             {{ currentUser.lastName }}
           </p>
-          <p><strong>Cedula:</strong> {{ currentUser.idNumber }}</p>
-          <p><strong>Telefono:</strong> {{ currentUser.phoneNumber }}</p>
+          <p>
+            <strong>Cedula:</strong> {{ formatIdNumber(currentUser.idNumber) }}
+          </p>
+          <p>
+            <strong>Telefono:</strong>
+            {{ formatPhoneNumber(currentUser.phoneNumber) }}
+          </p>
           <p><strong>Correo:</strong> {{ currentUser.email }}</p>
           <p><strong>Vehiculo:</strong> {{ currentAppointment.Cars }}</p>
           <p><strong>Servicio:</strong> {{ currentAppointment.Service }}</p>

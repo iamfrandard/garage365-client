@@ -31,6 +31,9 @@ export class AppointmentWorkshopListComponent {
   };
 
   tutorials?: Appointment[];
+  appointment1?: Appointment[];
+  appointment2?: Appointment[];
+  appointment3?: Appointment[];
   user?: Usuario[];
   currentAppointment: Appointment = {};
   currentUser: Usuario = {};
@@ -114,8 +117,12 @@ export class AppointmentWorkshopListComponent {
   retrieveTutorials(): void {
     this._AppointmentWorkshopService.getAll().subscribe({
       next: (data: any) => {
+        console.log(data)
         this.tutorials = data.appointments;
         this.user = data.user;
+        this.appointment1
+        this.appointment2
+        this.appointment3
       },
       error: (e) => console.error(e),
     });
@@ -171,4 +178,24 @@ export class AppointmentWorkshopListComponent {
       this.billFile = event.target.files[0];
     }
   }
+
+  formatPhoneNumber(phoneNumber: string): string {
+    if (!phoneNumber) return "";
+    const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    }
+    return phoneNumber;
+  }
+
+  formatIdNumber(idNumber: string): string {
+    if (!idNumber) return "";
+    const cleaned = ('' + idNumber).replace(/\D/g, ''); 
+    const match = cleaned.match(/^(\d{3})(\d{7})(\d{1})$/);
+    if (match) {
+      return match[1] + '-' + match[2] + '-' + match[3];
+    }
+    return idNumber;
+  }  
 }
