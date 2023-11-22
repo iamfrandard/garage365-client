@@ -214,14 +214,15 @@
                   ></textarea>
                 </li>
               </ul>
-              <button
-                class="justify-content-center"
-                (click)="saveTutorial()"
-                [disabled]="!Locations || !Services || !commentValue"
-                class="btn btn-outline-danger"
-              >
-                Registrar
-              </button>
+              <div class="d-flex justify-content-center">
+                <button
+                  (click)="saveTutorial()"
+                  [disabled]="!Locations || !Services || !commentValue"
+                  class="btn btn-outline-danger"
+                >
+                  Registrar
+                </button>
+              </div>
             </div>
             <h3 *ngIf="Alert" style="color: red">Cita Agendada</h3>
           </div>
