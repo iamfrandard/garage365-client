@@ -122,19 +122,23 @@ export class AppointmentWorkshopListComponent {
   }
 
   retrieveTutorials(): void {
-    this._AppointmentWorkshopService.getAll().subscribe({
-      next: (data: any) => {
-        console.log(data)
-        this.tutorials = data.appointments;
-        this.user = data.user;
+  this._AppointmentWorkshopService.getAll().subscribe({
+    next: (data: any) => {
+      console.log(data)
+      // Asegúrate de que tutorials no sea undefined
+      this.tutorials = data.appointments || [];
+      this.user = data.user;
+
+      if (this.tutorials) {
         this.tutorials = this.tutorials.filter(tutorial => tutorial.Workshop == this.CurrentUser && tutorial.Status !== 'Cancelada');
-        this.appointment1
-        this.appointment2
-        this.appointment3
-      },
-      error: (e) => console.error(e),
-    });
-  }
+        this.appointment1 = this.tutorials.filter(tutorial => tutorial.Confirm == false);
+        this.appointment2 = this.tutorials.filter(tutorial => tutorial.Confirm == true && tutorial.Status !== 'Completado');
+        this.appointment3 = this.tutorials.filter(tutorial => tutorial.Status == 'Completado');
+      }
+    },
+    error: (e) => console.error(e),
+  });
+}
 
   setActiveTutorial(data: Appointment, User: Usuario): void {
     this.currentAppointment = data;
