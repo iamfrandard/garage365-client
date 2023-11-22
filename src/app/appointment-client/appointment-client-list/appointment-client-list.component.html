@@ -8,41 +8,33 @@
     <div class="row">
       <div
         class="col-md-6"
-        *ngFor="let tutorial of tutorials; let i = index"
+        *ngFor="let tutorial of appointment1; let i = index"
         [class.active]="i == currentIndex"
         (click)="setActiveTutorial(tutorial, i)"
       >
-        <div
-          *ngIf="
-            tutorial.Status !== Estado0 &&
-            tutorial.Confirm == false &&
-            tutorial.Status !== Estado4
-          "
-        >
-          <div *ngIf="tutorial.UserID == CurrentUser">
-            <div
-              class="icon-box"
-              data-aos="fade-up"
-              data-aos-delay="100"
-              data-bs-toggle="modal"
-              [attr.data-bs-toggle]="tutorial.Confirm ? null : 'modal'"
-              data-bs-target="#modalCancel"
-            >
-              <i class="bi bi-card-checklist"></i>
-              <h4>{{ tutorial.Workshop }}</h4>
-              <p><strong>Horario: </strong> {{ tutorial.Schedule }}</p>
-              <p><strong>Ubicacion: </strong> {{ tutorial.Location }}</p>
-              <p><strong>Carro: </strong> {{ tutorial.Cars }}</p>
-              <p><strong>Servicio: </strong> {{ tutorial.Service }}</p>
-              <p><strong>Comentarios: </strong> {{ tutorial.Comment }}</p>
-              <p *ngIf="tutorial.PriorityService == true">
-                <strong>Servicio prioritario: </strong> Activo
-              </p>
-              <p *ngIf="tutorial.Status == ''">
-                <strong>Confirmacion: </strong>
-                {{ tutorial.Confirm ? "Aceptado" : "Pendiente de aceptacion" }}
-              </p>
-            </div>
+        <div *ngIf="tutorial.UserID == CurrentUser">
+          <div
+            class="icon-box"
+            data-aos="fade-up"
+            data-aos-delay="100"
+            data-bs-toggle="modal"
+            [attr.data-bs-toggle]="tutorial.Confirm ? null : 'modal'"
+            data-bs-target="#modalCancel"
+          >
+            <i class="bi bi-card-checklist"></i>
+            <h4>{{ tutorial.Workshop }}</h4>
+            <p><strong>Horario: </strong> {{ tutorial.Schedule }}</p>
+            <p><strong>Ubicacion: </strong> {{ tutorial.Location }}</p>
+            <p><strong>Carro: </strong> {{ tutorial.Cars }}</p>
+            <p><strong>Servicio: </strong> {{ tutorial.Service }}</p>
+            <p><strong>Comentarios: </strong> {{ tutorial.Comment }}</p>
+            <p *ngIf="tutorial.PriorityService == true">
+              <strong>Servicio prioritario: </strong> Activo
+            </p>
+            <p *ngIf="tutorial.Status == ''">
+              <strong>Confirmacion: </strong>
+              {{ tutorial.Confirm ? "Aceptado" : "Pendiente de aceptacion" }}
+            </p>
           </div>
         </div>
       </div>
@@ -60,19 +52,11 @@
     <div>
       <div>
         <div
-          *ngFor="let tutorial of tutorials; let i = index"
+          *ngFor="let tutorial of appointment2; let i = index"
           [class.active]="i == currentIndex"
           (click)="setActiveTutorial(tutorial, i)"
         >
-          <div
-            class="row"
-            *ngIf="
-              tutorial.UserID == CurrentUser &&
-              tutorial.Status !== Estado4 &&
-              tutorial.Status !== Estado0 &&
-              tutorial.Confirm
-            "
-          >
+          <div class="row" *ngIf="tutorial.UserID == CurrentUser">
             <div class="col-md-6">
               <div
                 class="icon-box"
@@ -102,7 +86,6 @@
                   }}
                 </p>
 
-                <!-- Botón para pagar que solo aparece si el estado es 'Finalizado' -->
                 <div
                   class="d-flex justify-content-center"
                   *ngIf="tutorial.Status == 'Finalizado'"
@@ -267,13 +250,13 @@
     <div class="row">
       <div
         class="col-md-6"
-        *ngFor="let tutorial of tutorials; let i = index"
+        *ngFor="let tutorial of appointment3; let i = index"
         [class.active]="i == currentIndex"
         (click)="setActiveTutorial(tutorial, i)"
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
       >
-        <div *ngIf="tutorial.Status == 'Completado'">
+        <div *ngIf="tutorial.UserID == CurrentUser">
           <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
             <h4>{{ tutorial.Workshop }}</h4>
             <p><strong>Carro: </strong> {{ tutorial.Cars }}</p>
@@ -372,6 +355,7 @@
           type="button"
           class="btn btn-outline-success"
           (click)="postComment()"
+          [disabled]="!comment"
           data-bs-dismiss="modal"
         >
           Aceptar
@@ -382,86 +366,88 @@
 </div>
 <!-- Modal -->
 
-<div
-  class="modal fade"
-  id="modalCancel"
-  aria-hidden="true"
-  aria-labelledby="modalCancelToggleLabel"
-  tabindex="-1"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">
-          <strong>Cancelacion de reserva</strong>
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-          (click)="refreshWindow()"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <p>
-          ¿Está seguro de que desea cancelar su reserva? Esta acción no se puede
-          deshacer.
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-outline-danger"
-          data-bs-dismiss="modal"
-        >
-          Cancelar
-        </button>
-        <button
-          class="btn btn-outline-success"
-          data-bs-target="#exampleModalToggle2"
-          data-bs-toggle="modal"
-          (click)="cancelAppointment()"
-        >
-          Aceptar
-        </button>
+<div>
+  <div
+    class="modal fade"
+    id="modalCancel"
+    aria-hidden="true"
+    aria-labelledby="modalCancelToggleLabel"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">
+            <strong>Cancelacion de reserva</strong>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="refreshWindow()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            ¿Está seguro de que desea cancelar su reserva? Esta acción no se
+            puede deshacer.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button
+            class="btn btn-outline-success"
+            data-bs-target="#exampleModalToggle2"
+            data-bs-toggle="modal"
+            (click)="cancelAppointment()"
+          >
+            Aceptar
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div
-  class="modal fade"
-  id="exampleModalToggle2"
-  aria-hidden="true"
-  aria-labelledby="exampleModalToggleLabel2"
-  tabindex="-1"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">
-          <strong>Cancelacion de reserva</strong>
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-          (click)="refreshWindow()"
-        ></button>
-      </div>
-      <div class="modal-body">
-        {{ message }}
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-outline-danger"
-          data-bs-dismiss="modal"
-          (click)="refreshWindow()"
-        >
-          Cerrar
-        </button>
+  <div
+    class="modal fade"
+    id="exampleModalToggle2"
+    aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">
+            <strong>Cancelacion de reserva</strong>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="refreshWindow()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          {{ message }}
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+            (click)="refreshWindow()"
+          >
+            Cerrar
+          </button>
+        </div>
       </div>
     </div>
   </div>

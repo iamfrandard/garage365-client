@@ -11,6 +11,10 @@ import { StorageServiceComponent } from 'src/app/services/storage.service';
 })
 export class AppointmentClientListComponent {
   tutorials?: Appointment[];
+  appointment1?: Appointment[];
+  appointment2?: Appointment[];
+  appointment3?: Appointment[];
+
   currentTutorial: Appointment = {};
   currentIndex = -1;
   title = '';
@@ -24,13 +28,18 @@ export class AppointmentClientListComponent {
   Estado3 = 'Finalizado';
   Estado4 = 'Cancelada';
 
+  rating: number = 0;
+  comment: string = '';
+
+  CurrentUser = '';
+
   constructor(
     private _AppointmentClientService: AppointmentClientService,
     private _StorageService: StorageServiceComponent,
     private router: Router
   ) {}
 
-  CurrentUser = '';
+  
 
   ngOnInit(): void {
     const currentUser2 = this._StorageService.getUser().roles;
@@ -51,6 +60,9 @@ export class AppointmentClientListComponent {
       next: (data) => {
         this.tutorials = data;
         this.tutorials = this.tutorials.filter(tutorial => tutorial.Status !== 'Cancelada');
+        this.appointment1 = this.tutorials.filter(tutorial => tutorial.Status == null);
+        this.appointment2 = this.tutorials.filter(tutorial => tutorial.Status !== null && tutorial.Status !== 'Completado');
+        this.appointment3 = this.tutorials.filter(tutorial => tutorial.Status == 'Completado');
       },
       error: (e) => console.error(e),
     });
@@ -93,8 +105,7 @@ export class AppointmentClientListComponent {
     this.router.navigateByUrl(`/payment/${id}`);
   }
 
-  rating: number = 0;
-  comment: string = '';
+  
 
   postComment(): void {
     const workshopString: string = String(this.currentTutorial.Workshop);
