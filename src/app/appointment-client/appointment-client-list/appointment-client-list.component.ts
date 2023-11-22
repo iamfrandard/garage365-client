@@ -59,10 +59,16 @@ export class AppointmentClientListComponent {
     this._AppointmentClientService.getAll().subscribe({
       next: (data) => {
         this.tutorials = data;
+        console.log (this.tutorials)
         this.tutorials = this.tutorials.filter(tutorial => tutorial.Status !== 'Cancelada');
+        console.log (this.tutorials)
         this.appointment1 = this.tutorials.filter(tutorial => tutorial.Confirm == false);
-        this.appointment2 = this.tutorials.filter(tutorial => tutorial.Status !== null && tutorial.Status !== 'Completado');
+        this.appointment2 = this.tutorials.filter(tutorial => tutorial.Confirm == true && tutorial.Status !== 'Completado');
         this.appointment3 = this.tutorials.filter(tutorial => tutorial.Status == 'Completado');
+
+        console.log (this.appointment1)
+        console.log (this.appointment2)
+        console.log (this.appointment3)
       },
       error: (e) => console.error(e),
     });

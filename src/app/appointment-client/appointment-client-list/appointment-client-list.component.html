@@ -50,13 +50,13 @@
     </div>
 
     <div>
-      <div>
+      <div class="row">
         <div
           *ngFor="let tutorial of appointment2; let i = index"
           [class.active]="i == currentIndex"
           (click)="setActiveTutorial(tutorial, i)"
         >
-          <div class="row" *ngIf="tutorial.UserID == CurrentUser">
+          <div *ngIf="tutorial.UserID == CurrentUser">
             <div class="col-md-6">
               <div
                 class="icon-box"
@@ -271,7 +271,6 @@
   </div>
 </section>
 
-<!-- Modal -->
 <div
   class="modal fade"
   id="staticBackdrop"
@@ -364,7 +363,6 @@
     </div>
   </div>
 </div>
-<!-- Modal -->
 
 <div>
   <div
