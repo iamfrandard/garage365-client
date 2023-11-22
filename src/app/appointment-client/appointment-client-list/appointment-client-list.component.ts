@@ -60,7 +60,7 @@ export class AppointmentClientListComponent {
       next: (data) => {
         this.tutorials = data;
         console.log (this.tutorials)
-        this.tutorials = this.tutorials.filter(tutorial => tutorial.Status !== 'Cancelada');
+        this.tutorials = this.tutorials.filter(tutorial => tutorial.UserID == this.CurrentUser && tutorial.Status !== 'Cancelada');
         console.log (this.tutorials)
         this.appointment1 = this.tutorials.filter(tutorial => tutorial.Confirm == false);
         this.appointment2 = this.tutorials.filter(tutorial => tutorial.Confirm == true && tutorial.Status !== 'Completado');
