@@ -178,24 +178,4 @@ export class AppointmentWorkshopListComponent {
       this.billFile = event.target.files[0];
     }
   }
-
-  formatPhoneNumber(phoneNumber: string): string {
-    if (!phoneNumber) return "";
-    const cleaned = ('' + phoneNumber).replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-    if (match) {
-      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
-    }
-    return phoneNumber;
-  }
-
-  formatIdNumber(idNumber: string): string {
-    if (!idNumber) return "";
-    const cleaned = ('' + idNumber).replace(/\D/g, ''); 
-    const match = cleaned.match(/^(\d{3})(\d{7})(\d{1})$/);
-    if (match) {
-      return match[1] + '-' + match[2] + '-' + match[3];
-    }
-    return idNumber;
-  }  
 }
