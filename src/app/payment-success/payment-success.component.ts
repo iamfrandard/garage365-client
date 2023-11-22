@@ -17,7 +17,7 @@ export class PaymentSuccessComponent {
       setTimeout(() => {this.router.navigate(['/inicio']);});
     }
     setTimeout(() => {
-      this.router.navigate(['/perfil']);
+      this.router.navigate(['/reservas']);
     }, 5000);
   }
 }
