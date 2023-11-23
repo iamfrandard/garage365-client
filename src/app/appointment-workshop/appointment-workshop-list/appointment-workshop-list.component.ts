@@ -124,8 +124,6 @@ export class AppointmentWorkshopListComponent {
   retrieveTutorials(): void {
   this._AppointmentWorkshopService.getAll().subscribe({
     next: (data: any) => {
-      console.log(data)
-      // Asegúrate de que tutorials no sea undefined
       this.tutorials = data.appointments || [];
       this.user = data.user;
 
@@ -156,10 +154,8 @@ export class AppointmentWorkshopListComponent {
       .subscribe(
         (isSuccess) => {
           if (isSuccess) {
-            console.log('Cancelación exitosa');
             this.message = "Su reserva ha sido cancelada exitosamente. Agradecemos su comprensión.";
           } else {
-            console.log('Cancelación fallida');
             this.message = "Lo sentimos, las reservas solo pueden cancelarse con al menos 3 días de anticipación. Para más detalles, por favor revise nuestras políticas de cancelación.";
           }
         },
@@ -179,7 +175,6 @@ export class AppointmentWorkshopListComponent {
           const res = await this._AppointmentClientService
               .updateL(this.currentAppointment.id, formData)
               .toPromise();
-          console.log('Factura actualizada con éxito');
       } catch (e) {
         console.error(e);
       }
