@@ -184,18 +184,4 @@ export class SearchComponent {
       error: (e) => console.error(e),
     });
   }
-
-  nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.getWorkshops(this.currentPage);
-    }
-  }
-
-  prevPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.getWorkshops(this.currentPage);
-    }
-  }
 }
