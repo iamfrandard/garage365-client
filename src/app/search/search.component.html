@@ -29,8 +29,8 @@
           (change)="onBrandSelected($event)"
         >
           <option value="" disabled selected>Filtrar por marca</option>
-          <option *ngFor="let brand of brands" [value]="brand.name">
-            {{ brand?.name }}
+          <option *ngFor="let brand of brands" [value]="brand">
+            {{ brand }}
           </option>
         </select>
         <select

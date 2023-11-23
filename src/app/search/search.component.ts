@@ -14,7 +14,7 @@ export class SearchComponent {
   workshops: Search[] = [];
   currentTutorial: Search = {};
   currentIndex = -1;
-  brands: any[] = [];
+  brands: string[] = [];
   addresses: string[] = [];
   selectedBrand: string = '';
   selectedAddress: string = '';
