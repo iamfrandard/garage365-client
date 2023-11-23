@@ -501,6 +501,13 @@ export class RegisterComponent implements OnInit {
             detail: 'Registro Satisfactorio!',
           });
           this.router.navigate(['/ingreso']);
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'ATENCION!',
+            detail:
+              '¡Hemos enviado un mensaje de validación a su correo electrónico para verificar su usuario!',
+            life: 20000,
+          });
         },
         error: (err) => {
           this.errorMessage = err.error.message;
@@ -621,6 +628,13 @@ export class RegisterComponent implements OnInit {
               detail: 'Registro Satisfactorio!',
             });
             this.router.navigate(['/ingreso']);
+            this.messageService.add({
+              severity: 'warn',
+              summary: 'ATENCION!',
+              detail:
+                'Su cuenta está actualmente bajo verificación. Al finalizar este proceso, se le enviará un correo de confirmación.',
+              life: 20000,
+            });
           },
           error: (err) => {
             this.errorMessage = err.error.message;
