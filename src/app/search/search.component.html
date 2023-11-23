@@ -26,10 +26,10 @@
         <select
           placeholder="Filtrar Marca"
           [(ngModel)]="selectedBrand"
-          (change)="onBrandSelected(brand?.name)"
+          (change)="onBrandSelected(x)"
         >
           <option value="" disabled selected>Filtrar por marca</option>
-          <option *ngFor="let brand of brands" [value]="brand">
+          <option *ngFor="let brand of brands" [value]="x">
             {{ brand?.name }}
           </option>
         </select>
