@@ -81,7 +81,7 @@ export class RecoverPasswordComponent {
     this.authService.getUserIdByEmail(emailValue).subscribe(
       (data) => {
         this.Id = data.userId || data.workshopId;
-        this.resetLink = 'http://localhost:8081/resetpassword/' + this.Id;
+        this.resetLink = 'https://garage365.netlify.app/resetpassword/' + this.Id;
         this.sendEmail();
       },
       (error: any) => {
