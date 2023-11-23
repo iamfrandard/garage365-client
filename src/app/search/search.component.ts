@@ -16,7 +16,7 @@ export class SearchComponent {
   currentIndex = -1;
   brands: any[] = [];
   addresses: string[] = [];
-  selectedBrand: any = '';
+  selectedBrand: string = '';
   selectedAddress: string = '';
   errorMessage: string = '';
   searchValue: string = '';
@@ -46,7 +46,7 @@ export class SearchComponent {
   loadUserInfo(): void {
     this.authService.getUserInfo().subscribe({
       next: (data) => {
-        this.brands = data.brands.name;
+        this.brands = data.brands;
         this.addresses = data.addresses;
       },
       error: (e) => {

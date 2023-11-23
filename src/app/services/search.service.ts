@@ -12,7 +12,6 @@ export class SearchServiceComponent {
   constructor(private http: HttpClient) {}
 
   getAll(page: number = 1, brand?: string, address?: string): Observable<any> {
-    // Cambia a any, ya que ahora no es solo un array de Search[]
     let params = new HttpParams().set('page', page.toString());
     if (brand) params = params.set('brand', brand);
     if (address) params = params.set('address', address);
