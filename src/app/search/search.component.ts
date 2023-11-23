@@ -147,7 +147,6 @@ export class SearchComponent {
     this.selectedAddress = '';
     if (selectElement) {
       this.selectedBrand = selectElement.value;
-      console.log(this.selectedBrand)
       this.applyFilters();
     }
   }
@@ -160,7 +159,6 @@ export class SearchComponent {
     this.selectedBrand = '';
     if (selectElement) {
       this.selectedAddress = selectElement.value;
-      console.log(this.selectedAddress)
       this.applyFilters();
     }
   }
@@ -169,7 +167,6 @@ export class SearchComponent {
     this.tutorialService.getAllBrands().subscribe({
       next: (data) => {
         this.brands = data;
-        console.log(this.brands)
       },
       error: (e) => console.error(e),
     });
@@ -179,7 +176,6 @@ export class SearchComponent {
     this.tutorialService.getAllAddresses().subscribe({
       next: (data) => {
         this.addresses = data;
-        console.log(this.addresses)
       },
       error: (e) => console.error(e),
     });

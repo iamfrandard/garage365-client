@@ -13,8 +13,6 @@ export class SearchServiceComponent {
 
   getAll(page: number = 1, brand?: string, address?: string): Observable<any> {
     let params = new HttpParams().set('page', page.toString());
-    console.log(brand)
-    console.log(address)
     if (brand) params = params.set('brand', brand);
     if (address) params = params.set('address', address);
 
