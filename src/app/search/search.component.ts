@@ -136,7 +136,6 @@ export class SearchComponent {
   }
 
   applyFilters(): void {
-    console.log(this.currentPage)
     this.getWorkshops(this.currentPage);
   }
 
