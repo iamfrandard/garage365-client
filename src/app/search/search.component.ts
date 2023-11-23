@@ -16,7 +16,7 @@ export class SearchComponent {
   currentIndex = -1;
   brands: any[] = [];
   addresses: string[] = [];
-  selectedBrand: string = '';
+  selectedBrand: any = '';
   selectedAddress: string = '';
   errorMessage: string = '';
   searchValue: string = '';
@@ -46,7 +46,7 @@ export class SearchComponent {
   loadUserInfo(): void {
     this.authService.getUserInfo().subscribe({
       next: (data) => {
-        this.brands = data.brands;
+        this.brands = data.brands.name;
         this.addresses = data.addresses;
       },
       error: (e) => {
@@ -136,6 +136,7 @@ export class SearchComponent {
   }
 
   applyFilters(): void {
+    console.log(this.currentPage)
     this.getWorkshops(this.currentPage);
   }
 
@@ -160,6 +161,7 @@ export class SearchComponent {
     this.selectedBrand = '';
     if (selectElement) {
       this.selectedAddress = selectElement.value;
+      console.log(this.selectedAddress)
       this.applyFilters();
     }
   }
