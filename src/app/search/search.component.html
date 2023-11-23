@@ -30,7 +30,7 @@
         >
           <option value="" disabled selected>Filtrar por marca</option>
           <option *ngFor="let brand of brands" [value]="brand">
-            {{ brand?.name }}
+            {{ brand }}
           </option>
         </select>
         <select

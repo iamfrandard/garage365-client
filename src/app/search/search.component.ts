@@ -147,6 +147,7 @@ export class SearchComponent {
     this.selectedAddress = '';
     if (selectElement) {
       this.selectedBrand = selectElement.value;
+      console.log(this.selectedBrand)
       this.applyFilters();
     }
   }
@@ -167,7 +168,6 @@ export class SearchComponent {
     this.tutorialService.getAllBrands().subscribe({
       next: (data) => {
         this.brands = data;
-        console.log(data)
       },
       error: (e) => console.error(e),
     });
