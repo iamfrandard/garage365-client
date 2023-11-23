@@ -28,6 +28,8 @@
               (change)="
                 selectDetailsWorkshop(currentWorkshopData?.WorkshopName)
               "
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Nombre:</strong></td>
@@ -38,6 +40,8 @@
             <input
               type="checkbox"
               (change)="selectDetailsWorkshop(currentWorkshopData?.phoneNumber)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Teléfono:</strong></td>
@@ -48,6 +52,8 @@
             <input
               type="checkbox"
               (change)="selectDetailsWorkshop(currentWorkshopData?.idNumber)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>RNC:</strong></td>
@@ -58,6 +64,8 @@
             <input
               type="checkbox"
               (change)="selectDetailsWorkshop(currentWorkshopData?.email)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Email:</strong></td>
@@ -65,14 +73,6 @@
         </tr>
       </tbody>
     </table>
-    <button
-      type="button"
-      class="btn btn-outline-success"
-      data-bs-toggle="modal"
-      data-bs-target="#modalEdit"
-    >
-      Modificar
-    </button>
   </div>
   <!-- Información del Taller -->
 

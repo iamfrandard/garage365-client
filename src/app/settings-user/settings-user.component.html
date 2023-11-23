@@ -26,6 +26,8 @@
             <input
               type="checkbox"
               (change)="selectDetails(currentUserData?.firstName)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Nombre:</strong></td>
@@ -36,6 +38,8 @@
             <input
               type="checkbox"
               (change)="selectDetails(currentUserData?.lastName)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Apellido:</strong></td>
@@ -46,6 +50,8 @@
             <input
               type="checkbox"
               (change)="selectDetails(currentUserData?.phoneNumber)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Teléfono:</strong></td>
@@ -56,6 +62,8 @@
             <input
               type="checkbox"
               (change)="selectDetails(currentUserData?.idNumber)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Cedula:</strong></td>
@@ -66,6 +74,8 @@
             <input
               type="checkbox"
               (change)="selectDetails(currentUserData?.email)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Email:</strong></td>
@@ -76,6 +86,8 @@
             <input
               type="checkbox"
               (change)="selectDetails(currentUserData?.address)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Dirección:</strong></td>
@@ -86,6 +98,8 @@
             <input
               type="checkbox"
               (change)="selectDetails(currentUserData?.address2)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Dirección 2:</strong></td>
@@ -96,6 +110,8 @@
             <input
               type="checkbox"
               (change)="selectDetails(currentUserData?.province)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Provincia:</strong></td>
@@ -106,6 +122,8 @@
             <input
               type="checkbox"
               (change)="selectDetails(currentUserData?.city)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Ciudad:</strong></td>
@@ -116,6 +134,8 @@
             <input
               type="checkbox"
               (change)="selectDetails(currentUserData?.sector)"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEdit"
             />
           </td>
           <td><strong>Sector:</strong></td>
@@ -123,14 +143,6 @@
         </tr>
       </tbody>
     </table>
-    <button
-      type="button"
-      class="btn btn-outline-success"
-      data-bs-toggle="modal"
-      data-bs-target="#modalEdit"
-    >
-      Modificar
-    </button>
   </div>
   <!-- Información del Usuario -->
 
