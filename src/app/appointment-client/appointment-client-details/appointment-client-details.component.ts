@@ -191,7 +191,9 @@ export class AppointmentClientDetailsComponent {
       },
       error: (e) => console.error(e),
     });
-    this.router.navigate(["/tutorials"]);
+    if ((this.CurrentUser2 = this.Role)) {
+      this.router.navigate(["/reservas"]);
+    }
   }
 
   newTutorial(): void {
