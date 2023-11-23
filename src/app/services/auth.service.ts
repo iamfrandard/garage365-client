@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
 
-const AUTH_API = 'https://goldfish-app-67lk9.ondigitalocean.app/api/auth/';
+const AUTH_API = "https://goldfish-app-67lk9.ondigitalocean.app/api/auth/";
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ "Content-Type": "application/json" }),
 };
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
@@ -61,7 +61,7 @@ export class AuthService {
     return this.http.post(`${AUTH_API}deleteSchedule`, data);
   }
 
-  getAllDetails(workshopId: any): Observable<any>{
+  getAllDetails(workshopId: any): Observable<any> {
     return this.http.get(`${AUTH_API}getAllDetails/${workshopId}`);
   }
   updateDetails(data: any): Observable<any> {
@@ -104,7 +104,7 @@ export class AuthService {
 
   login(inputMail: string, inputPassword: string): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signin',
+      AUTH_API + "signin",
       {
         inputMail,
         inputPassword,
@@ -114,19 +114,19 @@ export class AuthService {
   }
 
   checkEmailExists(inputMail: string): Observable<any> {
-    return this.http.post(AUTH_API + 'checkEmail', { inputMail }, httpOptions);
+    return this.http.post(AUTH_API + "checkEmail", { inputMail }, httpOptions);
   }
   getUserInfo(): Observable<any> {
-    return this.http.get(AUTH_API + 'getUserInfo', httpOptions);
+    return this.http.get(AUTH_API + "getUserInfo", httpOptions);
   }
 
   getUserInfoUser(): Observable<any> {
-    return this.http.get(AUTH_API + 'getUserInfoUser', httpOptions);
+    return this.http.get(AUTH_API + "getUserInfoUser", httpOptions);
   }
 
   getUserIdByEmail(inputMail: string): Observable<any> {
     return this.http.post(
-      AUTH_API + 'getUserIdByEmail',
+      AUTH_API + "getUserIdByEmail",
       { inputMail },
       httpOptions
     );
@@ -153,7 +153,7 @@ export class AuthService {
     }>
   ): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signupU',
+      AUTH_API + "signupU",
       {
         inputName,
         inputLastName,
@@ -177,7 +177,7 @@ export class AuthService {
     inputNumberW: string,
     inputMailW: string,
     inputPasswordW: string,
-    inputImage: File,
+    imageBase64: string,
     inputCertificate: File,
     inputWorkshopID: string,
     addedLocations: Array<{
@@ -194,13 +194,13 @@ export class AuthService {
     }>
   ): Observable<any> {
     const formData = new FormData();
-    formData.append('inputNameWorkshop', inputNameWorkshop);
-    formData.append('inputNumberW', inputNumberW);
-    formData.append('inputMailW', inputMailW);
-    formData.append('inputPasswordW', inputPasswordW);
-    formData.append('inputImage', inputImage);
-    formData.append('inputCertificate', inputCertificate);
-    formData.append('inputWorkshopID', inputWorkshopID);
+    formData.append("inputNameWorkshop", inputNameWorkshop);
+    formData.append("inputNumberW", inputNumberW);
+    formData.append("inputMailW", inputMailW);
+    formData.append("inputPasswordW", inputPasswordW);
+    formData.append("inputImage", imageBase64);
+    formData.append("inputCertificate", inputCertificate);
+    formData.append("inputWorkshopID", inputWorkshopID);
 
     addedLocations.forEach((location, index) => {
       formData.append(`inputAddressW${index}`, location.Adress);
@@ -211,7 +211,7 @@ export class AuthService {
     });
 
     for (let i = 0; i < inputBrandW.length; i++) {
-      formData.append('inputBrandW' + i, inputBrandW[i]);
+      formData.append("inputBrandW" + i, inputBrandW[i]);
     }
 
     services.forEach((service, index) => {
@@ -222,10 +222,10 @@ export class AuthService {
       );
     });
 
-    return this.http.post(AUTH_API + 'signupE', formData);
+    return this.http.post(AUTH_API + "signupE", formData);
   }
 
   logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout', {}, httpOptions);
+    return this.http.post(AUTH_API + "signout", {}, httpOptions);
   }
 }

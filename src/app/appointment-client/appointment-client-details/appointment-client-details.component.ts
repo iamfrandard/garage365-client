@@ -1,44 +1,45 @@
-import { Component, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Appointment } from 'src/app/models/appointment.model';
-import { AppointmentClientService } from 'src/app/services/appointmentClient.service';
-import { SearchServiceComponent } from 'src/app/services/search.service';
-import { StorageServiceComponent } from 'src/app/services/storage.service';
+import { Component, Input } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Appointment } from "src/app/models/appointment.model";
+import { AppointmentClientService } from "src/app/services/appointmentClient.service";
+import { SearchServiceComponent } from "src/app/services/search.service";
+import { StorageServiceComponent } from "src/app/services/storage.service";
+import { MessageService } from "primeng/api";
 
 @Component({
-  selector: 'app-appointment-client-details',
-  templateUrl: './appointment-client-details.component.html',
-  styleUrls: ['./appointment-client-details.component.css'],
+  selector: "app-appointment-client-details",
+  templateUrl: "./appointment-client-details.component.html",
+  styleUrls: ["./appointment-client-details.component.css"],
 })
 export class AppointmentClientDetailsComponent {
-  Locations = '';
-  Services = '';
+  Locations = "";
+  Services = "";
   Alert = false;
-  commentValue: string = '';
+  commentValue: string = "";
   isPriorityService: boolean = false;
   reviews: any[] = [];
   cars: any[] = [];
   _Cars: any[] = [];
   averageRating: number = 0;
-  workshopId: string = '';
+  workshopId: string = "";
   schedules: any[] = [];
-  selectedDay = '';
-  selectedTime = '';
-  selectedDate = '';
+  selectedDay = "";
+  selectedTime = "";
+  selectedDate = "";
 
   currentSlide = 0;
   autoSlideInterval: any;
 
   _Appointment: Appointment = {
-    UserID: '',
-    Workshop: '',
-    Schedule: '',
-    Location: '',
-    Service: '',
-    Status: '',
-    Bill: { amount: '', file: '' },
+    UserID: "",
+    Workshop: "",
+    Schedule: "",
+    Location: "",
+    Service: "",
+    Status: "",
+    Bill: { amount: "", file: "" },
     Confirm: false,
-    Comment: '',
+    Comment: "",
     PriorityService: false,
   };
   submitted = false;
@@ -47,45 +48,47 @@ export class AppointmentClientDetailsComponent {
   @Input() viewMode = true;
 
   @Input() Appointment: Appointment = {
-    UserID: '',
-    Workshop: '',
-    Schedule: '',
-    Status: '',
-    Bill: { amount: '', file: '' },
+    UserID: "",
+    Workshop: "",
+    Schedule: "",
+    Status: "",
+    Bill: { amount: "", file: "" },
     Confirm: false,
-    Comment: '',
+    Comment: "",
     PriorityService: false,
   };
 
   @Input() Workshop: any;
 
-  message = '';
+  message = "";
 
   constructor(
     private _AppointmentClientService: AppointmentClientService,
     private _SearchService: SearchServiceComponent,
     private route: ActivatedRoute,
     private _StorageService: StorageServiceComponent,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   direcciones: any[] = [];
   servicios: any[] = [];
-  CurrentUser = '';
-  CurrentUser2 = '';
-  Role = 'ROLE_USER';
+  CurrentUser = "";
+  CurrentUser2 = "";
+  Role = "ROLE_USER";
 
   ngOnInit(): void {
     const currentUser2 = this._StorageService.getUser().roles;
-    if(currentUser2 == null)
-    {
-      setTimeout(() => {this.router.navigate(['/inicio']);});
+    if (currentUser2 == null) {
+      setTimeout(() => {
+        this.router.navigate(["/inicio"]);
+      });
     }
-    this.message = '';
-    this.getTutorial(this.route.snapshot.params['id']);
+    this.message = "";
+    this.getTutorial(this.route.snapshot.params["id"]);
     this.CurrentUser = this._StorageService.getUser().id;
     this.CurrentUser2 = this._StorageService.getUser().roles;
-    this.workshopId = this.route.snapshot.params['id'];
+    this.workshopId = this.route.snapshot.params["id"];
     this.getCars();
     this.fetchReviews();
     this.autoSlide();
@@ -106,7 +109,7 @@ export class AppointmentClientDetailsComponent {
             this.direcciones = direccionesData.locations;
           },
           (error) => {
-            console.error('Error al obtener las direcciones:', error);
+            console.error("Error al obtener las direcciones:", error);
           }
         );
 
@@ -115,7 +118,7 @@ export class AppointmentClientDetailsComponent {
             this.servicios = serviciosData.vehicleService;
           },
           (error) => {
-            console.error('Error al obtener los servicios:', error);
+            console.error("Error al obtener los servicios:", error);
           }
         );
       },
@@ -128,21 +131,21 @@ export class AppointmentClientDetailsComponent {
       Schedule: this.Appointment.Schedule,
     };
 
-    this.message = '';
+    this.message = "";
 
     this._AppointmentClientService.update(this.Appointment.id, data).subscribe({
       next: (res) => {
         this.Appointment.Confirm = status;
         this.message = res.message
           ? res.message
-          : 'The status was updated successfully!';
+          : "The status was updated successfully!";
       },
       error: (e) => console.error(e),
     });
   }
 
   updateTutorial(): void {
-    this.message = '';
+    this.message = "";
 
     this._AppointmentClientService
       .update(this.Appointment.id, this.Appointment)
@@ -150,7 +153,7 @@ export class AppointmentClientDetailsComponent {
         next: (res) => {
           this.message = res.message
             ? res.message
-            : 'This tutorial was updated successfully!';
+            : "This tutorial was updated successfully!";
         },
         error: (e) => console.error(e),
       });
@@ -160,7 +163,13 @@ export class AppointmentClientDetailsComponent {
     const data = {
       UserID: this.CurrentUser,
       Workshop: this.Workshop.WorkshopName,
-      Schedule: this.selectedDay + ', ' + this.selectedTime + ' (' + this.selectedDate + ')',
+      Schedule:
+        this.selectedDay +
+        ", " +
+        this.selectedTime +
+        " (" +
+        this.selectedDate +
+        ")",
       Location: this.Locations,
       Service: this.Services,
       Comment: this.commentValue,
@@ -173,19 +182,26 @@ export class AppointmentClientDetailsComponent {
     this._AppointmentClientService.create(data).subscribe({
       next: (res) => {
         this.submitted = true;
+        this.messageService.add({
+          severity: "success",
+          summary: "Éxito",
+          detail: "Reserva realizada Exitosamente!",
+          life: 10000,
+        });
       },
       error: (e) => console.error(e),
     });
+    this.router.navigate(["/tutorials"]);
   }
 
   newTutorial(): void {
     this.submitted = false;
     this._Appointment = {
-      UserID: '',
-      Workshop: '',
-      Schedule: '',
-      Status: '',
-      Bill: { amount: '', file: '' },
+      UserID: "",
+      Workshop: "",
+      Schedule: "",
+      Status: "",
+      Bill: { amount: "", file: "" },
       Confirm: false,
     };
   }
@@ -209,7 +225,7 @@ export class AppointmentClientDetailsComponent {
           : 0;
       },
       (error) => {
-        console.error('Error fetching reviews:', error);
+        console.error("Error fetching reviews:", error);
       }
     );
   }
@@ -220,7 +236,7 @@ export class AppointmentClientDetailsComponent {
         this.cars = data;
       },
       (error) => {
-        console.error('Error fetching reviews:', error);
+        console.error("Error fetching reviews:", error);
       }
     );
   }
@@ -248,32 +264,31 @@ export class AppointmentClientDetailsComponent {
   }
 
   onDayChange() {
-    this.selectedTime = '';
+    this.selectedTime = "";
     const nextDate = this.calculateNextDate(this.selectedDay);
-  
-    const day = nextDate.getDate().toString().padStart(2, '0');
-    const month = (nextDate.getMonth() + 1).toString().padStart(2, '0'); // Enero es 0
+
+    const day = nextDate.getDate().toString().padStart(2, "0");
+    const month = (nextDate.getMonth() + 1).toString().padStart(2, "0"); // Enero es 0
     const year = nextDate.getFullYear();
-  
+
     this.selectedDate = `${day}-${month}-${year}`;
   }
-  
 
   getTimesForDay(day: string) {
     const schedule = this.schedules.find((s) => s.day === day);
     if (!schedule) return [];
-  
+
     const today = new Date();
     const currentHour = today.getHours();
     const isToday = this.isToday(schedule.day);
-  
+
     let times = [];
     for (let i = schedule.timeStart; i <= schedule.timeFinish; i++) {
       if (isToday && i <= currentHour) {
         continue;
       }
-  
-      const amPm = i >= 12 ? ': 00 PM' : ': 00 AM';
+
+      const amPm = i >= 12 ? ": 00 PM" : ": 00 AM";
       let hour = i % 12;
       hour = hour ? hour : 12;
       times.push(`${hour} ${amPm}`);
@@ -283,26 +298,41 @@ export class AppointmentClientDetailsComponent {
 
   isToday(selectedDay: string): boolean {
     const today = new Date();
-    const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const daysOfWeek = [
+      "Domingo",
+      "Lunes",
+      "Martes",
+      "Miércoles",
+      "Jueves",
+      "Viernes",
+      "Sábado",
+    ];
     const todayDayOfWeek = daysOfWeek[today.getDay()];
     return selectedDay === todayDayOfWeek;
   }
-  
 
   calculateNextDate(selectedDay: string): Date {
     const today = new Date();
     const todayDayOfWeek = today.getDay();
-    const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const daysOfWeek = [
+      "Domingo",
+      "Lunes",
+      "Martes",
+      "Miércoles",
+      "Jueves",
+      "Viernes",
+      "Sábado",
+    ];
     const selectedDayIndex = daysOfWeek.indexOf(selectedDay);
-  
+
     let daysToAdd = selectedDayIndex - todayDayOfWeek;
-  
+
     if (daysToAdd === 0) {
       return today;
     } else if (daysToAdd < 0) {
       daysToAdd += 7;
     }
-  
+
     const nextDate = new Date();
     nextDate.setDate(today.getDate() + daysToAdd);
     return nextDate;
@@ -310,10 +340,10 @@ export class AppointmentClientDetailsComponent {
 
   formatPhoneNumber(phoneNumber: string): string {
     if (!phoneNumber) return "";
-    const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+    const cleaned = ("" + phoneNumber).replace(/\D/g, "");
     const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
     if (match) {
-      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+      return "(" + match[1] + ") " + match[2] + "-" + match[3];
     }
     return phoneNumber;
   }

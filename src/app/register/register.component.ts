@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import data from '../register/Cars.json';
-import _carBrands from '../register/Brands.json';
-import datos from '../register/Location.json';
-import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { StorageServiceComponent } from '../services/storage.service';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../services/auth.service";
+import data from "../register/Cars.json";
+import _carBrands from "../register/Brands.json";
+import datos from "../register/Location.json";
+import { Router } from "@angular/router";
+import { MessageService } from "primeng/api";
+import { StorageServiceComponent } from "../services/storage.service";
 
 interface Province {
   name: string;
@@ -36,11 +36,10 @@ interface Location {
 }
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.css"],
 })
-
 export class RegisterComponent implements OnInit {
   form: any = {
     inputName: null,
@@ -79,10 +78,15 @@ export class RegisterComponent implements OnInit {
     inputServiceDescription: null,
   };
 
+  // Declara la propiedad base64Image
+  base64Image: string | null = null;
+  // Si estás manejando también un certificado como base64
+  base64Certificate: string | null = null;
+
   showAddFields: boolean = false;
   isSuccessful = false;
   isSignUpFailed = false;
-  errorMessage = '';
+  errorMessage = "";
 
   mostrarDiv1 = true;
   mostrarDiv2 = false;
@@ -106,16 +110,17 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUser2 = this.storageService.getUser().roles;
-    if(currentUser2 == 'ROLE_USER' || currentUser2 == 'ROLE_MODERATOR')
-    {
-      setTimeout(() => {this.router.navigate(['/inicio']);});
+    if (currentUser2 == "ROLE_USER" || currentUser2 == "ROLE_MODERATOR") {
+      setTimeout(() => {
+        this.router.navigate(["/inicio"]);
+      });
     }
   }
 
-  SelectedType: string = '';
-  selectedBrand: string = '';
-  selectedBrandW: string = '';
-  selectedModel: string = '';
+  SelectedType: string = "";
+  selectedBrand: string = "";
+  selectedBrandW: string = "";
+  selectedModel: string = "";
 
   brands = data;
 
@@ -194,18 +199,18 @@ export class RegisterComponent implements OnInit {
       if (isDuplicate) {
         this.hasWarnings2 = true;
         // Aquí puedes mostrar un mensaje de advertencia para informar al usuario sobre la duplicación
-        console.error('El vehículo ya ha sido añadido previamente.');
-        this.SelectedType = '';
-        this.selectedBrand = '';
-        this.selectedModel = '';
+        console.error("El vehículo ya ha sido añadido previamente.");
+        this.SelectedType = "";
+        this.selectedBrand = "";
+        this.selectedModel = "";
         this.form.inputYear = null;
         this.form.inputCarID = null;
         return;
       }
       this.addedVehicles.push(currentVehicle);
-      this.SelectedType = '';
-      this.selectedBrand = '';
-      this.selectedModel = '';
+      this.SelectedType = "";
+      this.selectedBrand = "";
+      this.selectedModel = "";
       this.form.inputYear = null;
       this.form.inputCarID = null;
     }
@@ -214,7 +219,7 @@ export class RegisterComponent implements OnInit {
   capturarValoresCarsSend() {
     if (this.hasWarnings2) {
       this.errorMessage =
-        'Hay advertencias activas. Por favor, resuelve los problemas antes de continuar.';
+        "Hay advertencias activas. Por favor, resuelve los problemas antes de continuar.";
       return;
     } else {
       if (
@@ -239,7 +244,7 @@ export class RegisterComponent implements OnInit {
   capturarValoresBrand(reset?: boolean, addBrand?: boolean) {
     if (reset && addBrand) {
       this.hasWarnings = false;
-      this.selectedBrandW = '';
+      this.selectedBrandW = "";
     }
 
     if (
@@ -252,20 +257,20 @@ export class RegisterComponent implements OnInit {
       }
 
       if (reset) {
-        this.selectedBrandW = '';
+        this.selectedBrandW = "";
       }
     } else {
-      this.errorMessage = 'Marca inválida o repetida';
+      this.errorMessage = "Marca inválida o repetida";
       this.isSignUpFailed = true;
-      this.selectedBrandW = '';
+      this.selectedBrandW = "";
     }
   }
 
   provinces: Province[] = datos.province;
 
-  selectedProvince: string = '';
-  selectedMunicipality: string = '';
-  selectedSector: string = '';
+  selectedProvince: string = "";
+  selectedMunicipality: string = "";
+  selectedSector: string = "";
 
   get municipalities() {
     const province = this.provinces.find(
@@ -321,17 +326,17 @@ export class RegisterComponent implements OnInit {
         this._contador++;
 
         if (cleanFields) {
-          this.selectedProvinceW = '';
-          this.selectedMunicipalityW = '';
-          this.selectedSectorW = '';
+          this.selectedProvinceW = "";
+          this.selectedMunicipalityW = "";
+          this.selectedSectorW = "";
           this.form.inputAddressW = null;
           this.form.inputAddress2W = null;
         }
       } else {
-        console.log('Location already added!');
-        this.selectedProvinceW = '';
-        this.selectedMunicipalityW = '';
-        this.selectedSectorW = '';
+        console.log("Location already added!");
+        this.selectedProvinceW = "";
+        this.selectedMunicipalityW = "";
+        this.selectedSectorW = "";
         this.form.inputAddressW = null;
         this.form.inputAddress2W = null;
       }
@@ -382,7 +387,7 @@ export class RegisterComponent implements OnInit {
   capturarValoresServiceAndBrand(): void {
     if (this.hasWarnings) {
       this.errorMessage =
-        'Hay advertencias activas. Por favor, resuelve los problemas antes de continuar.';
+        "Hay advertencias activas. Por favor, resuelve los problemas antes de continuar.";
       return;
     } else {
       this.capturarValoresService(true, false);
@@ -392,9 +397,9 @@ export class RegisterComponent implements OnInit {
 
   provincesW: Province[] = datos.province;
 
-  selectedProvinceW: string = '';
-  selectedMunicipalityW: string = '';
-  selectedSectorW: string = '';
+  selectedProvinceW: string = "";
+  selectedMunicipalityW: string = "";
+  selectedSectorW: string = "";
 
   get municipalitiesW() {
     const province = this.provincesW.find(
@@ -496,16 +501,16 @@ export class RegisterComponent implements OnInit {
           this.isSuccessful = true;
           this.isSignUpFailed = false;
           this.messageService.add({
-            severity: 'success',
-            summary: 'Éxito',
-            detail: 'Registro Satisfactorio!',
+            severity: "success",
+            summary: "Éxito",
+            detail: "Registro Satisfactorio!",
           });
-          this.router.navigate(['/ingreso']);
+          this.router.navigate(["/ingreso"]);
           this.messageService.add({
-            severity: 'warn',
-            summary: 'ATENCION!',
+            severity: "warn",
+            summary: "ATENCION!",
             detail:
-              '¡Hemos enviado un mensaje de validación a su correo electrónico para verificar su usuario!',
+              "¡Hemos enviado un mensaje de validación a su correo electrónico para verificar su usuario!",
             life: 20000,
           });
         },
@@ -513,8 +518,8 @@ export class RegisterComponent implements OnInit {
           this.errorMessage = err.error.message;
           this.hasWarnings2 = true;
           this.messageService.add({
-            severity: 'warn',
-            summary: 'Advertencia',
+            severity: "warn",
+            summary: "Advertencia",
             detail: this.errorMessage,
           });
           this.isSignUpFailed = true;
@@ -548,6 +553,18 @@ export class RegisterComponent implements OnInit {
     this.fileToUpload2 = file2;
   }
 
+  handleFileInput(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.base64Image = reader.result as string;
+    };
+    reader.onerror = (error) => {
+      console.log("Error: ", error);
+    };
+  }
+
   onSubmitWorkshop(): void {
     const {
       inputNameWorkshop,
@@ -564,7 +581,7 @@ export class RegisterComponent implements OnInit {
       !inputPasswordW ||
       !inputWorkshopID
     ) {
-      this.errorMessage = 'Por favor, Completa todos los campos requeridos!';
+      this.errorMessage = "Por favor, Completa todos los campos requeridos!";
       this.isSignUpFailed = true;
       return;
     }
@@ -572,13 +589,13 @@ export class RegisterComponent implements OnInit {
     const inputBrandW = this.selectedBrandsWorkshop;
 
     if (!inputBrandW || inputBrandW.length === 0) {
-      this.errorMessage = 'Por favor, Selecciona al menos una marca';
+      this.errorMessage = "Por favor, Selecciona al menos una marca";
       this.isSignUpFailed = true;
       return;
     }
 
     if (!this.addedLocations || this.addedLocations.length === 0) {
-      this.errorMessage = 'Por favor, Añade al menos una ubicación';
+      this.errorMessage = "Por favor, Añade al menos una ubicación";
       this.isSignUpFailed = true;
       return;
     }
@@ -602,8 +619,8 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-    if (this.fileToUpload && this.fileToUpload2) {
-      const inputImage = this.fileToUpload;
+    if (this.base64Image && this.fileToUpload2) {
+      const inputImage = this.base64Image;
       const inputCertificate = this.fileToUpload2;
       this.authService
         .registerWorkshop(
@@ -623,16 +640,16 @@ export class RegisterComponent implements OnInit {
             this.isSuccessful = true;
             this.isSignUpFailed = false;
             this.messageService.add({
-              severity: 'success',
-              summary: 'Éxito',
-              detail: 'Registro Satisfactorio!',
+              severity: "success",
+              summary: "Éxito",
+              detail: "Registro Satisfactorio!",
             });
-            this.router.navigate(['/ingreso']);
+            this.router.navigate(["/ingreso"]);
             this.messageService.add({
-              severity: 'warn',
-              summary: 'ATENCION!',
+              severity: "warn",
+              summary: "ATENCION!",
               detail:
-                'Su cuenta está actualmente bajo verificación. Al finalizar este proceso, se le enviará un correo de confirmación.',
+                "Su cuenta está actualmente bajo verificación. Al finalizar este proceso, se le enviará un correo de confirmación.",
               life: 20000,
             });
           },
@@ -640,8 +657,8 @@ export class RegisterComponent implements OnInit {
             this.errorMessage = err.error.message;
             this.hasWarnings = true;
             this.messageService.add({
-              severity: 'warn',
-              summary: 'Advertencia',
+              severity: "warn",
+              summary: "Advertencia",
               detail: this.errorMessage,
             });
             this.isSignUpFailed = true;
@@ -649,13 +666,13 @@ export class RegisterComponent implements OnInit {
           },
         });
     } else {
-      this.errorMessage = 'La Imagen del Taller no ha seleccionada!';
+      this.errorMessage = "La Imagen del Taller no ha seleccionada!";
       this.isSignUpFailed = true;
       this.hasWarnings = true;
       this.isWarningShown = true;
       this.messageService.add({
-        severity: 'warn',
-        summary: 'Advertencia',
+        severity: "warn",
+        summary: "Advertencia",
         detail: this.errorMessage,
       });
     }
