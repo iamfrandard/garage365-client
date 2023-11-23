@@ -93,6 +93,34 @@
           ]
         },
         {
+          "marca": "Suzuki",
+          "modelos": ["Swift", "Vitara", "SX4 S-Cross", "Jimny", "Celerio"]
+        },
+        {
+          "marca": "Mitsubishi",
+          "modelos": ["Outlander", "Lancer", "Pajero", "Eclipse Cross", "ASX"]
+        },
+        {
+          "marca": "Dodge",
+          "modelos": ["Charger", "Challenger", "Durango", "Journey", "Ram"]
+        },
+        {
+          "marca": "Chrysler",
+          "modelos": ["300", "Pacifica", "Voyager", "Aspen", "Crossfire"]
+        },
+        {
+          "marca": "Saab",
+          "modelos": ["9-3", "9-5", "9-4X", "900", "9-7X"]
+        },
+        {
+          "marca": "Hummer",
+          "modelos": ["H1", "H2", "H3", "EV"]
+        },
+        {
+          "marca": "Lincoln",
+          "modelos": ["Navigator", "Continental", "MKZ", "Aviator", "Nautilus"]
+        },
+        {
           "marca": "Volkswagen",
           "modelos": ["Golf", "Jetta", "Passat", "Tiguan", "Atlas", "Arteon"]
         },
@@ -108,6 +136,82 @@
           ]
         },
         {
+          "marca": "Skoda",
+          "modelos": ["Octavia", "Superb", "Kodiaq", "Karoq", "Fabia"]
+        },
+        {
+          "marca": "Citroën",
+          "modelos": ["C3", "C4", "C5 Aircross", "Berlingo", "SpaceTourer"]
+        },
+        {
+          "marca": "Seat",
+          "modelos": ["Leon", "Ibiza", "Ateca", "Tarraco", "Arona"]
+        },
+        {
+          "marca": "Opel",
+          "modelos": ["Corsa", "Astra", "Insignia", "Crossland", "Grandland"]
+        },
+        {
+          "marca": "Fiat",
+          "modelos": ["500", "Panda", "Tipo", "Punto", "Ducato"]
+        },
+        {
+          "marca": "SsangYong",
+          "modelos": ["Tivoli", "Korando", "Rexton", "Musso", "Rodius"]
+        },
+        {
+          "marca": "Jeep",
+          "modelos": [
+            "Wrangler",
+            "Grand Cherokee",
+            "Compass",
+            "Renegade",
+            "Gladiator"
+          ]
+        },
+        {
+          "marca": "Peugeot",
+          "modelos": ["208", "308", "508", "2008", "3008", "5008"]
+        },
+        {
+          "marca": "Renault",
+          "modelos": ["Clio", "Megane", "Kadjar", "Talisman", "Captur", "Zoe"]
+        },
+        {
+          "marca": "Alfa Romeo",
+          "modelos": ["Giulia", "Stelvio", "4C", "Giulietta", "Tonale"]
+        },
+        {
+          "marca": "Infiniti",
+          "modelos": ["Q50", "Q60", "QX50", "QX60", "QX80"]
+        },
+        {
+          "marca": "Mini",
+          "modelos": [
+            "Cooper",
+            "Countryman",
+            "Clubman",
+            "Paceman",
+            "Convertible"
+          ]
+        },
+        {
+          "marca": "Rolls-Royce",
+          "modelos": ["Phantom", "Ghost", "Wraith", "Dawn", "Cullinan"]
+        },
+        {
+          "marca": "Bentley",
+          "modelos": ["Continental GT", "Bentayga", "Flying Spur", "Mulsanne"]
+        },
+        {
+          "marca": "McLaren",
+          "modelos": ["570S", "720S", "GT", "Speedtail", "765LT"]
+        },
+        {
+          "marca": "Koenigsegg",
+          "modelos": ["Jesko", "Regera", "Agera", "Gemera", "One:1"]
+        },
+        {
           "marca": "Mazda",
           "modelos": ["Mazda3", "Mazda6", "CX-5", "CX-9", "MX-5 Miata", "CX-30"]
         },
@@ -118,6 +222,40 @@
         {
           "marca": "Volvo",
           "modelos": ["S60", "XC60", "XC90", "V60", "S90", "XC40"]
+        },
+        {
+          "marca": "GMC",
+          "modelos": ["Sierra", "Yukon", "Acadia", "Terrain", "Canyon"]
+        },
+        {
+          "marca": "Cadillac",
+          "modelos": ["Escalade", "CT6", "XT5", "ATS", "CT5"]
+        },
+        {
+          "marca": "Acura",
+          "modelos": ["MDX", "RDX", "TLX", "ILX", "NSX"]
+        },
+        {
+          "marca": "Smart",
+          "modelos": [
+            "Fortwo",
+            "Forfour",
+            "EQ Fortwo",
+            "EQ Forfour",
+            "Crossblade"
+          ]
+        },
+        {
+          "marca": "Buick",
+          "modelos": ["Enclave", "Encore", "LaCrosse", "Regal", "Envision"]
+        },
+        {
+          "marca": "Alpine",
+          "modelos": ["A110", "A110S", "A110 Legende", "A110 Pure", "A110 GT4"]
+        },
+        {
+          "marca": "Polestar",
+          "modelos": ["Polestar 1", "Polestar 2", "Polestar Precept"]
         },
         {
           "marca": "Tesla",
@@ -217,6 +355,136 @@
         {
           "marca": "Kawasaki",
           "modelos": ["Ninja", "Versys", "Z", "KLX"]
+        },
+        {
+          "marca": "Ducati",
+          "modelos": [
+            "Panigale",
+            "Monster",
+            "Multistrada",
+            "Diavel",
+            "Supersport"
+          ]
+        },
+        {
+          "marca": "Aprilia",
+          "modelos": ["RSV4", "Tuono", "Shiver", "Dorsoduro", "RS 660"]
+        },
+        {
+          "marca": "Royal Enfield",
+          "modelos": [
+            "Classic",
+            "Bullet",
+            "Himalayan",
+            "Interceptor",
+            "Continental GT"
+          ]
+        },
+        {
+          "marca": "MV Agusta",
+          "modelos": ["F4", "Brutale", "Dragster", "Turismo Veloce", "F3"]
+        },
+        {
+          "marca": "Indian Motorcycle",
+          "modelos": ["Scout", "Chief", "FTR", "Chieftain", "Springfield"]
+        },
+        {
+          "marca": "BMW Motorrad",
+          "modelos": ["R NineT", "S1000RR", "GS Adventure", "F750GS", "C400X"]
+        },
+        {
+          "marca": "Suzuki",
+          "modelos": ["GSX-R", "V-Strom", "DR-Z", "Boulevard", "Hayabusa"]
+        },
+        {
+          "marca": "Harley-Davidson",
+          "modelos": ["Sportster", "Softail", "Touring", "Street", "LiveWire"]
+        },
+        {
+          "marca": "Triumph",
+          "modelos": [
+            "Bonneville",
+            "Tiger",
+            "Street Triple",
+            "Rocket 3",
+            "Daytona"
+          ]
+        },
+        {
+          "marca": "Husqvarna",
+          "modelos": [
+            "Vitpilen",
+            "Svartpilen",
+            "701 Enduro",
+            "FE 350",
+            "TE 300i"
+          ]
+        },
+        {
+          "marca": "Beta",
+          "modelos": [
+            "RR Racing",
+            "Xtrainer",
+            "RR Enduro 4T",
+            "RR Enduro 2T",
+            "Alp 4.0"
+          ]
+        },
+        {
+          "marca": "Benelli",
+          "modelos": ["TRK 502", "Leoncino", "BN 125", "TNT 600", "752S"]
+        },
+        {
+          "marca": "Bimota",
+          "modelos": ["Tesimotard", "DB8", "DBX", "BB3", "Tesi H2"]
+        },
+        {
+          "marca": "Cagiva",
+          "modelos": ["Mito", "Elefant", "Raptor", "Gran Canyon", "V-Raptor"]
+        },
+        {
+          "marca": "Laverda",
+          "modelos": [
+            "750S",
+            "1000 3CL",
+            "RGS 1000",
+            "SFC 1000",
+            "Ghost Strike"
+          ]
+        },
+        {
+          "marca": "Moto Guzzi",
+          "modelos": ["V7", "V85 TT", "California", "Audace", "Eldorado"]
+        },
+        {
+          "marca": "Zongshen",
+          "modelos": ["Cyclone RX3", "RX4", "RZ3", "RZ5", "ZS125"]
+        },
+        {
+          "marca": "Victory",
+          "modelos": ["Octane", "Cross Country", "Vegas", "Hammer", "High-Ball"]
+        },
+        {
+          "marca": "Zero Motorcycles",
+          "modelos": ["SR/F", "SR/S", "FX", "DSR", "S"]
+        },
+        {
+          "marca": "GasGas",
+          "modelos": ["EC", "MC", "TXT Racing", "TXE", "EC Ranger"]
+        },
+        {
+          "marca": "Sherco",
+          "modelos": [
+            "SEF Factory",
+            "SC Factory",
+            "ST Factory",
+            "TY Classic",
+            "SE-R"
+          ]
+        },
+        {
+          "marca": "KTM",
+          "modelos": ["Duke", "RC", "Adventure", "Super Duke", "Freeride"]
         }
       ]
     },
@@ -232,7 +500,85 @@
           "modelos": ["R", "S", "P"]
         },
         {
-          "marca": "Mercedes-Benz",
+          "marca": "MAN",
+          "modelos": ["TGX", "TGS", "TGM", "TGL", "Lion's City"]
+        },
+        {
+          "marca": "Iveco",
+          "modelos": ["Stralis", "Eurocargo", "Daily", "Trakker", "S-Way"]
+        },
+        {
+          "marca": "DAF",
+          "modelos": ["XF", "CF", "LF", "XD", "XE"]
+        },
+        {
+          "marca": "Mack",
+          "modelos": ["Anthem", "Granite", "Pinnacle", "LR", "TerraPro"]
+        },
+        {
+          "marca": "Kenworth",
+          "modelos": ["T680", "W900", "T880", "K370", "T370"]
+        },
+        {
+          "marca": "JAC",
+          "modelos": ["N-Series", "J-Series", "HFC Series", "M-Series", "X200"]
+        },
+        {
+          "marca": "Sinotruk",
+          "modelos": ["Howo", "Golden Prince", "Hohan", "Sitrak", "Steyr"]
+        },
+        {
+          "marca": "Kamaz",
+          "modelos": ["5490", "6520", "43118", "6350", "6560"]
+        },
+        {
+          "marca": "Freightliner",
+          "modelos": ["Cascadia", "M2", "Columbia", "Coronado", "114SD"]
+        },
+        {
+          "marca": "Foton",
+          "modelos": ["Aumark", "Auman", "Tunland", "View", "Ollin"]
+        },
+        {
+          "marca": "Dongfeng",
+          "modelos": ["KX", "KL", "KC", "KR", "CM"]
+        },
+        {
+          "marca": "Tata Motors",
+          "modelos": ["Ultra", "Prima", "Signa", "LPT", "LPK"]
+        },
+        {
+          "marca": "International",
+          "modelos": ["LT", "HX", "MV", "RH", "CV"]
+        },
+        {
+          "marca": "Isuzu",
+          "modelos": ["N-Series", "F-Series", "D-Max", "ELF", "Giga"]
+        },
+        {
+          "marca": "Hino",
+          "modelos": [
+            "300 Series",
+            "500 Series",
+            "700 Series",
+            "Dutro",
+            "Profia"
+          ]
+        },
+        {
+          "marca": "UD Trucks",
+          "modelos": ["Quon", "Condor", "Quester", "Croner", "Kuzer"]
+        },
+        {
+          "marca": "Western Star",
+          "modelos": ["5700XE", "4900", "4700", "4800", "6900"]
+        },
+        {
+          "marca": "Peterbilt",
+          "modelos": ["579", "389", "567", "337", "220"]
+        },
+        {
+          "marca": "Mercedes Benz",
           "modelos": ["Actros", "Arocs", "Econic"]
         }
       ]
