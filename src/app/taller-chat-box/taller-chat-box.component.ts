@@ -8,37 +8,37 @@ import {
   ElementRef,
   ViewChild,
   ChangeDetectorRef,
-} from '@angular/core';
-import { SocketService, ChatMessage } from '../services/socket.service';
-import { UserService, ChatSession } from '../services/user.service';
-import { StorageServiceComponent } from '../services/storage.service';
-import { AuthService } from '../services/auth.service';
-import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+} from "@angular/core";
+import { SocketService, ChatMessage } from "../services/socket.service";
+import { UserService, ChatSession } from "../services/user.service";
+import { StorageServiceComponent } from "../services/storage.service";
+import { AuthService } from "../services/auth.service";
+import { MessageService } from "primeng/api";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-taller-chat-box',
-  templateUrl: './taller-chat-box.component.html',
-  styleUrls: ['./taller-chat-box.component.css'],
+  selector: "app-taller-chat-box",
+  templateUrl: "./taller-chat-box.component.html",
+  styleUrls: ["./taller-chat-box.component.css"],
 })
 export class TallerChatBoxComponent implements OnInit {
   @Input() taller: any;
   storedUser: any;
-  userName = '';
+  userName = "";
   @Output() chatVisibilityChanged = new EventEmitter<boolean>();
   @Output() chatClosed = new EventEmitter<void>();
   public messages: ChatMessage[] = [];
-  public newMessage: string = '';
+  public newMessage: string = "";
   public id: string | undefined;
   public sessions: ChatSession[] = [];
   public selectedSession: string | undefined;
 
-  @ViewChild('messageContainer') private messageContainer!: ElementRef;
+  @ViewChild("messageContainer") private messageContainer!: ElementRef;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
-      changes['taller'] &&
-      changes['taller'].currentValue !== changes['taller'].previousValue
+      changes["taller"] &&
+      changes["taller"].currentValue !== changes["taller"].previousValue
     ) {
       this.resetChat();
       this.cdRef.detectChanges();
@@ -47,7 +47,7 @@ export class TallerChatBoxComponent implements OnInit {
 
   resetChat(): void {
     this.messages = [];
-    this.newMessage = '';
+    this.newMessage = "";
   }
 
   ngAfterViewChecked() {
@@ -73,9 +73,10 @@ export class TallerChatBoxComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUser2 = this.storageService.getUser().roles;
-    if(currentUser2 == null)
-    {
-      setTimeout(() => {this.router.navigate(['/inicio']);});
+    if (currentUser2 == null) {
+      setTimeout(() => {
+        this.router.navigate(["/inicio"]);
+      });
     }
 
     this.socketService.getMessages().subscribe((message: ChatMessage) => {
@@ -110,23 +111,22 @@ export class TallerChatBoxComponent implements OnInit {
       this.loadSessions();
     } else {
       console.warn(
-        'El userId no está definido en el servicio de almacenamiento.'
+        "El userId no está definido en el servicio de almacenamiento."
       );
     }
   }
 
   showNotification(message: ChatMessage) {
     const isInitialTallerMessage =
-      message.content === 'Hola, estamos aqui para servirte!';
+      message.content === "Hola, estamos aqui para servirte!";
     const isSentByTaller = message.sender === message.tallerId;
 
     if (isInitialTallerMessage && isSentByTaller) {
       return;
     }
-
     this.messageService.add({
-      severity: 'info',
-      summary: `Nuevo mensaje de ${message.userName}`,
+      severity: "info",
+      summary: `Nuevo mensaje de ${message.tallerName}`,
       detail: message.content,
     });
   }
@@ -134,7 +134,7 @@ export class TallerChatBoxComponent implements OnInit {
   // Carga todas las sesiones de chat para el taller
   loadSessions() {
     if (!this.id) {
-      console.warn('El userId no está definido.');
+      console.warn("El userId no está definido.");
       return;
     }
   }
@@ -153,7 +153,7 @@ export class TallerChatBoxComponent implements OnInit {
   }
 
   sendMessage() {
-    if (this.newMessage.trim() === '' || !this.id) {
+    if (this.newMessage.trim() === "" || !this.id) {
       // console.log(
       //   'Intentando enviar mensaje...',
       //   this.newMessage,
@@ -164,7 +164,7 @@ export class TallerChatBoxComponent implements OnInit {
     }
 
     if (!this.id) {
-      console.warn('userId o selectedSession no están definidos.');
+      console.warn("userId o selectedSession no están definidos.");
       return;
     }
 
@@ -181,7 +181,7 @@ export class TallerChatBoxComponent implements OnInit {
     //console.log('Enviando mensaje:', messageToSend);
 
     this.socketService.sendMessage(messageToSend);
-    this.newMessage = '';
+    this.newMessage = "";
   }
 
   isSender(message: ChatMessage): boolean {
@@ -193,17 +193,17 @@ export class TallerChatBoxComponent implements OnInit {
 
   cerrarChat() {
     this.chatVisibilityChanged.emit(false);
-    localStorage.removeItem('currentSessionId');
+    localStorage.removeItem("currentSessionId");
     this.socketService.leaveTallerRoom(this.selectedSession as string);
     this.socketService.endSession(this.selectedSession as string);
 
     if (this.selectedSession) {
       this.socketService.deleteSession(this.selectedSession).subscribe(
         (response) => {
-          console.log('Sesión eliminada correctamente', response);
+          console.log("Sesión eliminada correctamente", response);
         },
         (error) => {
-          console.error('Error al eliminar la sesión:', error);
+          console.error("Error al eliminar la sesión:", error);
         }
       );
     }
