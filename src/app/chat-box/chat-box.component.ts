@@ -76,7 +76,7 @@ export class ChatBoxComponent implements OnInit, OnChanges {
         message.sender !== this.TallerId
       ) {
         // Muestra la notificación para el nuevo mensaje
-        //this.socketService.emitNewMessageEvent(message);
+        this.socketService.emitNewMessageEvent(message);
       }
     });
 
