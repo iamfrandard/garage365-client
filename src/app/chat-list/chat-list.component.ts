@@ -41,6 +41,7 @@ export class ChatListComponent implements OnInit {
     this.userId = user?.id;
     this.loadSessions();
     this.socketService.newMessage$.subscribe((message: ChatMessage) => {
+      console.log("Nuevo mensaje recibido:", message);
       if (
         message.userId &&
         (this.selectedSession === undefined ||
@@ -89,6 +90,7 @@ export class ChatListComponent implements OnInit {
     expertName?: string
   ): void {
     if (sessionId && userId && userName && expertId && expertName) {
+      console.log("Sesión seleccionada:", sessionId);
       this.selectedSession = sessionId;
       const user = this.storageService.getUser();
       this.onSessionChange.emit({
