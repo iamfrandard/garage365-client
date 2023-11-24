@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { StorageServiceComponent } from '../services/storage.service';
-import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../services/auth.service";
+import { StorageServiceComponent } from "../services/storage.service";
+import { Router } from "@angular/router";
+import { MessageService } from "primeng/api";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
   form: any = {
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   };
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
+  errorMessage = "";
   roles: string[] = [];
 
   constructor(
@@ -28,11 +28,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUser2 = this.storageService.getUser().roles;
-    if(currentUser2 == 'ROLE_USER' || currentUser2 == 'ROLE_MODERATOR')
-    {
-      setTimeout(() => {this.router.navigate(['/inicio']);});
+    if (currentUser2 == "ROLE_USER" || currentUser2 == "ROLE_MODERATOR") {
+      setTimeout(() => {
+        this.router.navigate(["/inicio"]);
+      });
     }
-    
+
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.roles = this.storageService.getUser().roles;
@@ -46,21 +47,21 @@ export class LoginComponent implements OnInit {
       next: (data) => {
         this.storageService.saveUser(data);
         this.messageService.add({
-          severity: 'success',
-          summary: 'Exitosamente',
-          detail: 'Bienvenido a Garage365',
+          severity: "success",
+          summary: "Acesso Exitoso",
+          detail: "Bienvenido a Garage365",
         });
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
-        this.router.navigate(['/reservas']);
+        this.router.navigate(["/reservas"]);
       },
       error: (err) => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
         this.messageService.add({
-          severity: 'error',
-          summary: 'Advertencia',
+          severity: "error",
+          summary: "Advertencia",
           detail: this.errorMessage,
         });
       },

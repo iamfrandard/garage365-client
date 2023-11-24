@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { io } from 'socket.io-client';
-import { Observable, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { io } from "socket.io-client";
+import { Observable, Subject } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 
-const API_URL2 = 'https://goldfish-app-67lk9.ondigitalocean.app/api/chat';
+const API_URL2 = "https://goldfish-app-67lk9.ondigitalocean.app/api/chat";
 
 export interface ChatMessage {
   _id?: string;
@@ -20,21 +20,22 @@ export interface ChatMessage {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class SocketService {
   private newMessageSubject = new Subject<ChatMessage>();
   newMessage$ = this.newMessageSubject.asObservable();
 
   private socket: any;
-  private readonly endpoint: string = 'https://goldfish-app-67lk9.ondigitalocean.app/';
+  private readonly endpoint: string =
+    "https://goldfish-app-67lk9.ondigitalocean.app/";
   private sessionId!: string;
 
   constructor(private http: HttpClient) {
     this.socket = io(this.endpoint); // Conéctate al servidor donde se encuentra tu backend
 
     // Escuchar el evento 'session' desde el servidor para obtener el sessionId
-    this.socket.on('session_id', (id: string) => {
+    this.socket.on("session_id", (id: string) => {
       this.sessionId = id;
     });
   }
@@ -45,13 +46,13 @@ export class SocketService {
 
   // Método para enviar mensajes al servidor
   sendMessage(message: ChatMessage): void {
-    this.socket.emit('send_message', message);
+    this.socket.emit("send_message", message);
   }
 
   // Método para escuchar mensajes desde el servidor
   public getMessages(): Observable<ChatMessage> {
     return new Observable((observer) => {
-      this.socket.on('new_message', (message: ChatMessage) => {
+      this.socket.on("new_message", (message: ChatMessage) => {
         observer.next(message);
       });
     });
@@ -63,12 +64,12 @@ export class SocketService {
 
   // Unirse a una sala de chat específica (sesión)
   joinSession(sessionId: string) {
-    this.socket.emit('join_session', sessionId);
+    this.socket.emit("join_session", sessionId);
   }
 
   // Dejar una sala de chat específica (sesión)
   leaveSession(sessionId: string) {
-    this.socket.emit('leave_taller', sessionId);
+    this.socket.emit("leave_taller", sessionId);
   }
 
   // Método para obtener el sessionId actual
@@ -88,12 +89,12 @@ export class SocketService {
       userName,
       tallerName,
     };
-    this.socket.emit('join_taller', data);
+    this.socket.emit("join_taller", data);
   }
 
   getSessionId(): Observable<string> {
     return new Observable<string>((observer) => {
-      this.socket.on('session_id', (sessionId: string) => {
+      this.socket.on("session_id", (sessionId: string) => {
         observer.next(sessionId);
       });
     });
@@ -103,7 +104,7 @@ export class SocketService {
     return new Observable<{ _id: string; isNewSession: boolean }>(
       (observer) => {
         this.socket.on(
-          'session',
+          "session",
           (sessionData: { _id: string; isNewSession: boolean }) => {
             observer.next(sessionData);
           }
@@ -112,24 +113,24 @@ export class SocketService {
     );
   }
   leaveTallerRoom(tallerId: string) {
-    this.socket.emit('leave_taller', tallerId);
+    this.socket.emit("leave_taller", tallerId);
   }
 
   onNewMessage() {
     return new Observable((observer) => {
-      this.socket.on('new_message', (message: ChatMessage) => {
+      this.socket.on("new_message", (message: ChatMessage) => {
         observer.next(message);
       });
     });
   }
 
   endSession(sessionId: string): void {
-    this.socket.emit('end_session', sessionId);
+    this.socket.emit("end_session", sessionId);
   }
 
   onNewResponse() {
     return new Observable((observer) => {
-      this.socket.on('new_response', (response: ChatMessage) => {
+      this.socket.on("new_response", (response: ChatMessage) => {
         observer.next(response);
       });
     });
@@ -152,5 +153,9 @@ export class SocketService {
     return this.http.get<ChatMessage[]>(API_URL2 + `/unread`, {
       params: { expertId },
     });
+  }
+
+  markMessageAsRead(messageId: string) {
+    return this.http.patch(`${API_URL2}/message/read/${messageId}`, {});
   }
 }

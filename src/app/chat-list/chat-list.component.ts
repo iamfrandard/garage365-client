@@ -1,13 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ChatMessage, SocketService } from '../services/socket.service';
-import { StorageServiceComponent } from '../services/storage.service';
-import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { ChatMessage, SocketService } from "../services/socket.service";
+import { StorageServiceComponent } from "../services/storage.service";
+import { MessageService } from "primeng/api";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-chat-list',
-  templateUrl: './chat-list.component.html',
-  styleUrls: ['./chat-list.component.css'],
+  selector: "app-chat-list",
+  templateUrl: "./chat-list.component.html",
+  styleUrls: ["./chat-list.component.css"],
 })
 export class ChatListComponent implements OnInit {
   sessions: any[] = [];
@@ -31,9 +31,10 @@ export class ChatListComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUser2 = this.storageService.getUser().roles;
-    if(currentUser2 == null)
-    {
-      setTimeout(() => {this.router.navigate(['/inicio']);});
+    if (currentUser2 == null) {
+      setTimeout(() => {
+        this.router.navigate(["/inicio"]);
+      });
     }
 
     const user = this.storageService.getUser();
@@ -58,20 +59,31 @@ export class ChatListComponent implements OnInit {
             } else if (response.message) {
               this.sessions = [];
             } else {
-              console.error('Unexpected response:', response);
+              console.error("Unexpected response:", response);
             }
           },
-          (error) => console.error('Error al cargar sesiones:', error)
+          (error) => console.error("Error al cargar sesiones:", error)
         );
     }
   }
 
   showNotification(message: ChatMessage) {
     this.messageService.add({
-      severity: 'info',
+      severity: "info",
       summary: `Nuevo mensaje de ${message.userName}`,
       detail: message.content,
     });
+  }
+
+  onMessageRead(messageId: string) {
+    this.socketService.markMessageAsRead(messageId).subscribe(
+      (response) => {
+        console.log("Mensaje marcado como leído", response);
+      },
+      (error) => {
+        console.error("Error al marcar el mensaje como leído", error);
+      }
+    );
   }
 
   selectSession(
@@ -91,8 +103,9 @@ export class ChatListComponent implements OnInit {
         expertId: expertId,
         expertName: expertName,
       });
+      this.onMessageRead(sessionId);
     } else {
-      console.warn('Tentativa de selección de una sesión sin datos completos');
+      console.warn("Tentativa de selección de una sesión sin datos completos");
     }
   }
 }
