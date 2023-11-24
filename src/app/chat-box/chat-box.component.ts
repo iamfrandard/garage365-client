@@ -137,14 +137,13 @@ export class ChatBoxComponent implements OnInit, OnChanges {
       }
     );
   }
-
-  // showNotification(message: ChatMessage) {
-  //   this.messageService.add({
-  //     severity: "info",
-  //     summary: `Nuevo mensaje de ${message.userName}`,
-  //     detail: message.content,
-  //   });
-  // }
+  showNotification(message: ChatMessage) {
+    this.messageService.add({
+      severity: "info",
+      summary: `Nuevo mensaje de ${message.userName}`,
+      detail: message.content,
+    });
+  }
 
   // Envía un nuevo mensaje al servidor a través de Socket.io
   sendMessage() {
