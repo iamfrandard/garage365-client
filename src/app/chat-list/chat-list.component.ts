@@ -41,7 +41,6 @@ export class ChatListComponent implements OnInit {
     this.userId = user?.id;
     this.loadSessions();
     this.socketService.newMessage$.subscribe((message: ChatMessage) => {
-      console.log("Nuevo mensaje recibido:", message);
       if (
         message.userId &&
         (this.selectedSession === undefined ||
