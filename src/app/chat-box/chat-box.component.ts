@@ -6,24 +6,24 @@ import {
   OnChanges,
   ElementRef,
   ViewChild,
-} from '@angular/core';
-import { SocketService, ChatMessage } from '../services/socket.service';
-import { StorageServiceComponent } from '../services/storage.service';
-import { MessageService } from 'primeng/api';
-import { DatePipe } from '@angular/common';
-import { Router } from '@angular/router';
+} from "@angular/core";
+import { SocketService, ChatMessage } from "../services/socket.service";
+import { StorageServiceComponent } from "../services/storage.service";
+import { MessageService } from "primeng/api";
+import { DatePipe } from "@angular/common";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-chat-box',
-  templateUrl: './chat-box.component.html',
-  styleUrls: ['./chat-box.component.css'],
+  selector: "app-chat-box",
+  templateUrl: "./chat-box.component.html",
+  styleUrls: ["./chat-box.component.css"],
 })
 export class ChatBoxComponent implements OnInit, OnChanges {
   @Input() sessionData:
     | { sessionId: string; userId: string; userName: string }
     | undefined;
   public messages: ChatMessage[] = [];
-  public newMessage: string = '';
+  public newMessage: string = "";
   public userId: string | undefined;
   public TallerId: string | undefined;
   public userName: string | undefined;
@@ -36,7 +36,7 @@ export class ChatBoxComponent implements OnInit, OnChanges {
     this.isOnline = true;
   }
 
-  @ViewChild('messageContainer') private messageContainer!: ElementRef;
+  @ViewChild("messageContainer") private messageContainer!: ElementRef;
 
   ngAfterViewChecked() {
     this.scrollToBottom();
@@ -59,9 +59,10 @@ export class ChatBoxComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     const currentUser2 = this.storageService.getUser().roles;
-    if(currentUser2 == null)
-    {
-      setTimeout(() => {this.router.navigate(['/inicio']);});
+    if (currentUser2 == null) {
+      setTimeout(() => {
+        this.router.navigate(["/inicio"]);
+      });
     }
     // Escucha los mensajes entrantes desde el servidor Socket.io
     this.socketService.getMessages().subscribe((message: ChatMessage) => {
@@ -75,7 +76,7 @@ export class ChatBoxComponent implements OnInit, OnChanges {
         message.sender !== this.TallerId
       ) {
         // Muestra la notificación para el nuevo mensaje
-        this.socketService.emitNewMessageEvent(message);
+        //this.socketService.emitNewMessageEvent(message);
       }
     });
 
@@ -85,7 +86,7 @@ export class ChatBoxComponent implements OnInit, OnChanges {
       this.TallerId = storedUser.id;
     } else {
       console.warn(
-        'El Taller no está definido en el servicio de almacenamiento.'
+        "El Taller no está definido en el servicio de almacenamiento."
       );
     }
 
@@ -94,13 +95,13 @@ export class ChatBoxComponent implements OnInit, OnChanges {
   }
 
   getFormattedMessageDate(date: Date): string {
-    return this.datePipe.transform(date, 'HH:mm')!;
+    return this.datePipe.transform(date, "HH:mm")!;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['sessionData'] && changes['sessionData'].currentValue) {
+    if (changes["sessionData"] && changes["sessionData"].currentValue) {
       const { sessionId, userId, userName, expertId, expertName } =
-        changes['sessionData'].currentValue;
+        changes["sessionData"].currentValue;
       this.activeSessionId = sessionId;
       this.userId = userId;
       this.userName = userName;
@@ -132,13 +133,13 @@ export class ChatBoxComponent implements OnInit, OnChanges {
         this.messages = messages;
       },
       (error) => {
-        console.error('Error fetching messages for session:', error);
+        console.error("Error fetching messages for session:", error);
       }
     );
   }
   showNotification(message: ChatMessage) {
     this.messageService.add({
-      severity: 'info',
+      severity: "info",
       summary: `Nuevo mensaje de ${message.userName}`,
       detail: message.content,
     });
@@ -147,7 +148,7 @@ export class ChatBoxComponent implements OnInit, OnChanges {
   // Envía un nuevo mensaje al servidor a través de Socket.io
   sendMessage() {
     if (
-      this.newMessage.trim() === '' ||
+      this.newMessage.trim() === "" ||
       !this.TallerId ||
       !this.activeSessionId
     )
@@ -169,6 +170,6 @@ export class ChatBoxComponent implements OnInit, OnChanges {
     this.socketService.sendMessage(messageToSend);
 
     // Limpia el campo de entrada de mensaje
-    this.newMessage = '';
+    this.newMessage = "";
   }
 }

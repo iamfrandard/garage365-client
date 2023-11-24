@@ -68,11 +68,13 @@ export class ChatListComponent implements OnInit {
   }
 
   showNotification(message: ChatMessage) {
-    this.messageService.add({
-      severity: "info",
-      summary: `Nuevo mensaje de ${message.userName}`,
-      detail: message.content,
-    });
+    if (message.userId !== this.selectedSession) {
+      this.messageService.add({
+        severity: "info",
+        summary: `Nuevo mensaje de ${message.userName}`,
+        detail: message.content,
+      });
+    }
   }
 
   selectSession(
