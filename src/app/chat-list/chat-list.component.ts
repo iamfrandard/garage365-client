@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class ChatListComponent implements OnInit {
   sessions: any[] = [];
   userId: string | undefined;
-  selectedSession: string | undefined;
+  selectedSession = "";
 
   @Output() onSessionChange: EventEmitter<{
     sessionId: string;
@@ -36,14 +36,14 @@ export class ChatListComponent implements OnInit {
         this.router.navigate(["/inicio"]);
       });
     }
-
+    console.log("selectedSession inicial:", this.selectedSession);
     const user = this.storageService.getUser();
     this.userId = user?.id;
     this.loadSessions();
     this.socketService.newMessage$.subscribe((message: ChatMessage) => {
       if (
         message.userId &&
-        (this.selectedSession === undefined ||
+        (this.selectedSession === "" ||
           this.selectedSession !== message.sessionId)
       ) {
         this.showNotification(message);
@@ -89,7 +89,6 @@ export class ChatListComponent implements OnInit {
     expertName?: string
   ): void {
     if (sessionId && userId && userName && expertId && expertName) {
-      console.log("Sesión seleccionada:", sessionId);
       this.selectedSession = sessionId;
       const user = this.storageService.getUser();
       this.onSessionChange.emit({
