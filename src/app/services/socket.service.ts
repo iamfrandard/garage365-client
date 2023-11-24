@@ -154,8 +154,4 @@ export class SocketService {
       params: { expertId },
     });
   }
-
-  markMessageAsRead(messageId: string) {
-    return this.http.patch(`${API_URL2}/message/read/${messageId}`, {});
-  }
 }

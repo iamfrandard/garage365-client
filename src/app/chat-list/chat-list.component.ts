@@ -75,17 +75,6 @@ export class ChatListComponent implements OnInit {
     });
   }
 
-  onMessageRead(messageId: string) {
-    this.socketService.markMessageAsRead(messageId).subscribe(
-      (response) => {
-        console.log("Mensaje marcado como leído", response);
-      },
-      (error) => {
-        console.error("Error al marcar el mensaje como leído", error);
-      }
-    );
-  }
-
   selectSession(
     sessionId?: string,
     userId?: string,
@@ -103,7 +92,6 @@ export class ChatListComponent implements OnInit {
         expertId: expertId,
         expertName: expertName,
       });
-      this.onMessageRead(sessionId);
     } else {
       console.warn("Tentativa de selección de una sesión sin datos completos");
     }
