@@ -70,7 +70,7 @@ export class ChatListComponent implements OnInit {
   showNotification(message: ChatMessage) {
     if (
       message.userId !== this.selectedSession ||
-      message.sender !== message.tallerId
+      message.userId !== message.tallerId
     ) {
       this.messageService.add({
         severity: "info",
