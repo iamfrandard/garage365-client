@@ -41,7 +41,9 @@ export class ChatListComponent implements OnInit {
     this.userId = user?.id;
     this.loadSessions();
     this.socketService.newMessage$.subscribe((message: ChatMessage) => {
-      this.showNotification(message);
+      if (message.userId && this.selectedSession !== message.sessionId) {
+        this.showNotification(message);
+      }
     });
   }
 
@@ -68,16 +70,11 @@ export class ChatListComponent implements OnInit {
   }
 
   showNotification(message: ChatMessage) {
-    if (
-      message.userId !== this.selectedSession ||
-      message.userId !== message.tallerId
-    ) {
-      this.messageService.add({
-        severity: "info",
-        summary: `Nuevo mensaje de ${message.userName}`,
-        detail: message.content,
-      });
-    }
+    this.messageService.add({
+      severity: "info",
+      summary: `Nuevo mensaje de ${message.userName}`,
+      detail: message.content,
+    });
   }
 
   selectSession(
