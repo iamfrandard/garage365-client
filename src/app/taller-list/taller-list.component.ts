@@ -72,6 +72,7 @@ export class TallerListComponent implements OnInit {
   iniciarChatConTaller(taller: any) {
     if (this.selectedTaller) {
       this.socketService.leaveTallerRoom(this.selectedTaller._id);
+      //this.currentSessionId = sessionData._id;
     }
 
     const storedUser = this.storageService.getUser();
