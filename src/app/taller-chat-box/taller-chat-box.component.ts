@@ -82,7 +82,7 @@ export class TallerChatBoxComponent implements OnInit {
     this.socketService.getMessages().subscribe((message: ChatMessage) => {
       const storedUser = this.storageService.getUser();
       if (message.tallerId !== this.id && message.sender !== this.id) {
-        this.showNotification(message);
+        this.socketService.emitNewMessageEvent(message);
       }
       this.messages.push(message);
     });

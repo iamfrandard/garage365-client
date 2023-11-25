@@ -36,7 +36,6 @@ export class ChatListComponent implements OnInit {
         this.router.navigate(["/inicio"]);
       });
     }
-    console.log("selectedSession inicial:", this.selectedSession);
     const user = this.storageService.getUser();
     this.userId = user?.id;
     this.loadSessions();
