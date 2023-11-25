@@ -55,7 +55,7 @@ export class TallerListComponent implements OnInit {
 
     this.socketService.newMessage$.subscribe((message: ChatMessage) => {
       if (
-        message.userId &&
+        message.tallerId &&
         (this.currentSessionId === undefined ||
           this.currentSessionId !== message.sessionId)
       ) {
