@@ -124,11 +124,11 @@ export class TallerChatBoxComponent implements OnInit {
     if (isInitialTallerMessage && isSentByTaller) {
       return;
     }
-    this.messageService.add({
-      severity: "info",
-      summary: `Nuevo mensaje de ${message.tallerName}`,
-      detail: message.content,
-    });
+    // this.messageService.add({
+    //   severity: "info",
+    //   summary: `Nuevo mensaje de ${message.tallerName}`,
+    //   detail: message.content,
+    // });
   }
 
   // Carga todas las sesiones de chat para el taller

@@ -1,18 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SearchServiceComponent } from '../services/search.service';
-import { SocketService, ChatMessage } from '../services/socket.service';
-import { StorageServiceComponent } from '../services/storage.service';
-import { AuthService } from '../services/auth.service';
-import { take } from 'rxjs/operators';
-import { Route, Router } from '@angular/router';
+import { Component, OnInit, Input } from "@angular/core";
+import { SearchServiceComponent } from "../services/search.service";
+import { SocketService, ChatMessage } from "../services/socket.service";
+import { StorageServiceComponent } from "../services/storage.service";
+import { AuthService } from "../services/auth.service";
+import { take } from "rxjs/operators";
+import { Route, Router } from "@angular/router";
+import { MessageService } from "primeng/api";
 
 @Component({
-  selector: 'app-taller-list',
-  templateUrl: './taller-list.component.html',
-  styleUrls: ['./taller-list.component.css'],
+  selector: "app-taller-list",
+  templateUrl: "./taller-list.component.html",
+  styleUrls: ["./taller-list.component.css"],
 })
 export class TallerListComponent implements OnInit {
-  userName = '';
+  userName = "";
   talleres: any[] = [];
   activeChats: any[] = [];
   showChat: boolean = false;
@@ -30,27 +31,42 @@ export class TallerListComponent implements OnInit {
     private socketService: SocketService,
     private storageService: StorageServiceComponent,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     const currentUser2 = this.storageService.getUser().roles;
-    if(currentUser2 == 'ROLE_MODERATOR' || currentUser2 == null) 
-    {
-      setTimeout(() => {this.router.navigate(['/inicio']);});
+    if (currentUser2 == "ROLE_MODERATOR" || currentUser2 == null) {
+      setTimeout(() => {
+        this.router.navigate(["/inicio"]);
+      });
     }
-    
+
     this.searchService.getAll().subscribe(
       (talleres) => {
         this.talleres = talleres;
       },
       (error) => {
-        console.error('Error al obtener la lista de talleres', error);
+        console.error("Error al obtener la lista de talleres", error);
       }
     );
 
     const user = this.storageService.getUser();
     this.userName = user.email;
+
+    this.socketService.newMessage$.subscribe((message: ChatMessage) => {
+      if (this.currentSessionId !== message.sessionId) {
+        this.showNotification(message);
+      }
+    });
+  }
+  showNotification(message: ChatMessage) {
+    this.messageService.add({
+      severity: "info",
+      summary: `Nuevo mensaje de ${message.tallerName}`,
+      detail: message.content,
+    });
   }
 
   iniciarChatConTaller(taller: any) {
@@ -60,7 +76,7 @@ export class TallerListComponent implements OnInit {
 
     const storedUser = this.storageService.getUser();
     if (!storedUser || !storedUser.id) {
-      console.error('Usuario no definido en el almacenamiento.');
+      console.error("Usuario no definido en el almacenamiento.");
       return;
     }
 
@@ -77,7 +93,7 @@ export class TallerListComponent implements OnInit {
       .pipe(take(1))
       .subscribe((sessionData) => {
         this.currentSessionId = sessionData._id;
-        localStorage.setItem('currentSessionId', sessionData._id);
+        localStorage.setItem("currentSessionId", sessionData._id);
         if (sessionData.isNewSession) {
           this.sendMessageToTaller(taller);
         } else {
@@ -101,7 +117,7 @@ export class TallerListComponent implements OnInit {
     const message: ChatMessage = {
       tallerId: taller._id,
       sender: taller._id,
-      content: 'Hola, estamos aqui para servirte!',
+      content: "Hola, estamos aqui para servirte!",
       timestamp: new Date(),
       userId: storedUser.id,
       userName: this.userName,
@@ -114,7 +130,7 @@ export class TallerListComponent implements OnInit {
     if (this.socketService.isConnected()) {
       this.socketService.sendMessage(message);
     } else {
-      console.error('El socket aún no está conectado.');
+      console.error("El socket aún no está conectado.");
     }
 
     // Actualiza selectedTaller al taller seleccionado
@@ -128,6 +144,6 @@ export class TallerListComponent implements OnInit {
   }
 
   logout(): void {
-    this.router.navigate(['/inicio']);
+    this.router.navigate(["/inicio"]);
   }
 }
