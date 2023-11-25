@@ -2,9 +2,8 @@ import { Component, OnInit, Input } from "@angular/core";
 import { SearchServiceComponent } from "../services/search.service";
 import { SocketService, ChatMessage } from "../services/socket.service";
 import { StorageServiceComponent } from "../services/storage.service";
-import { AuthService } from "../services/auth.service";
 import { take } from "rxjs/operators";
-import { Route, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 
 @Component({
@@ -30,7 +29,6 @@ export class TallerListComponent implements OnInit {
     private searchService: SearchServiceComponent,
     private socketService: SocketService,
     private storageService: StorageServiceComponent,
-    private authService: AuthService,
     private router: Router,
     private messageService: MessageService
   ) {}
@@ -56,7 +54,11 @@ export class TallerListComponent implements OnInit {
     this.userName = user.email;
 
     this.socketService.newMessage$.subscribe((message: ChatMessage) => {
-      if (this.currentSessionId !== message.sessionId) {
+      if (
+        message.userId &&
+        (this.currentSessionId === undefined ||
+          this.currentSessionId !== message.sessionId)
+      ) {
         this.showNotification(message);
       }
     });
@@ -72,7 +74,6 @@ export class TallerListComponent implements OnInit {
   iniciarChatConTaller(taller: any) {
     if (this.selectedTaller) {
       this.socketService.leaveTallerRoom(this.selectedTaller._id);
-      //this.currentSessionId = sessionData._id;
     }
 
     const storedUser = this.storageService.getUser();
