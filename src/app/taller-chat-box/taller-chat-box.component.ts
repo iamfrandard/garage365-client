@@ -80,11 +80,7 @@ export class TallerChatBoxComponent implements OnInit {
     }
 
     this.socketService.getMessages().subscribe((message: ChatMessage) => {
-      if (
-        message.tallerId !== this.id &&
-        message.sender !== this.id &&
-        this.selectedSession !== message.sessionId
-      ) {
+      if (message.tallerId !== this.id && message.sender !== this.id) {
         this.socketService.emitNewMessageEvent(message);
       }
 

@@ -58,7 +58,7 @@ export class TallerListComponent implements OnInit {
       if (
         message.tallerId &&
         (this.selectedTaller === undefined ||
-          this.selectedTaller !== message.sessionId)
+          this.selectedTaller !== message.sender)
       ) {
         this.showNotification(message);
       }
