@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class ChatListComponent implements OnInit {
   sessions: any[] = [];
   userId: string | undefined;
-  selectedSession = "";
+  selectedSession: string | undefined;
 
   @Output() onSessionChange: EventEmitter<{
     sessionId: string;
@@ -43,7 +43,7 @@ export class ChatListComponent implements OnInit {
     this.socketService.newMessage$.subscribe((message: ChatMessage) => {
       if (
         message.userId &&
-        (this.selectedSession === "" ||
+        (this.selectedSession === undefined ||
           this.selectedSession !== message.sessionId)
       ) {
         this.showNotification(message);
