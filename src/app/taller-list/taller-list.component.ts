@@ -57,8 +57,8 @@ export class TallerListComponent implements OnInit {
       console.log("Nuevo mensaje recibido:", message);
       if (
         message.tallerId &&
-        (this.selectedTaller === undefined ||
-          this.selectedTaller !== message.sender)
+        (this.selectedTaller._id === undefined ||
+          this.selectedTaller._id !== message.sender)
       ) {
         this.showNotification(message);
       }
