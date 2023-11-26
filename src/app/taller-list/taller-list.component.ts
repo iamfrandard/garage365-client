@@ -35,6 +35,20 @@ export class TallerListComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUser2 = this.storageService.getUser().roles;
+
+    this.socketService.newMessage$.subscribe((message: ChatMessage) => {
+      console.log("Nuevo mensaje recibido:", message);
+      console.log("session:", message.sessionId);
+      console.log("Current:", this.currentSessionId);
+      if (
+        message.sessionId !==
+        this.currentSessionId /*(this.selectedTaller === undefined ||
+          this.selectedTaller !== message.sender)*/
+      ) {
+        this.showNotification(message);
+      }
+    });
+
     if (currentUser2 == "ROLE_MODERATOR" || currentUser2 == null) {
       setTimeout(() => {
         this.router.navigate(["/inicio"]);
@@ -52,19 +66,6 @@ export class TallerListComponent implements OnInit {
 
     const user = this.storageService.getUser();
     this.userName = user.email;
-
-    this.socketService.newMessage$.subscribe((message: ChatMessage) => {
-      console.log("Nuevo mensaje recibido:", message);
-      console.log("session:", message.sessionId);
-      console.log("Current:", this.currentSessionId);
-      if (
-        message.sessionId !==
-        this.currentSessionId /*(this.selectedTaller === undefined ||
-          this.selectedTaller !== message.sender)*/
-      ) {
-        this.showNotification(message);
-      }
-    });
   }
   showNotification(message: ChatMessage) {
     console.log("Mostrando notificación para el mensaje:", message);
