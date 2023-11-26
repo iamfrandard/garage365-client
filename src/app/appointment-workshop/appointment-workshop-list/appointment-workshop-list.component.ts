@@ -117,7 +117,7 @@ export class AppointmentWorkshopListComponent {
       this.updateStatus("En Progreso");
     } else if (this.selectedOption === "3") {
       this.updateStatus("Finalizado");
-      this.selectedOption = "Finalizado";
+      this.refreshWindow();
     }
   }
 
