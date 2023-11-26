@@ -511,7 +511,7 @@ export class RegisterComponent implements OnInit {
             summary: "ATENCION!",
             detail:
               "¡Hemos enviado un mensaje de validación a su correo electrónico para verificar su usuario!",
-            life: 20000,
+            life: 30000,
           });
         },
         error: (err) => {
@@ -650,7 +650,7 @@ export class RegisterComponent implements OnInit {
               summary: "ATENCION!",
               detail:
                 "Su cuenta está actualmente bajo verificación. Al finalizar este proceso, se le enviará un correo de confirmación.",
-              life: 20000,
+              life: 30000,
             });
           },
           error: (err) => {

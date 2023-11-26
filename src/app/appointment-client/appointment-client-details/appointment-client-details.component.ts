@@ -182,17 +182,19 @@ export class AppointmentClientDetailsComponent {
     this._AppointmentClientService.create(data).subscribe({
       next: (res) => {
         this.submitted = true;
-        this.messageService.add({
+        /*this.messageService.add({
           severity: "success",
           summary: "Éxito",
           detail: "Reserva realizada Exitosamente!",
-          life: 10000,
-        });
+          life: 25000,
+        });*/
       },
       error: (e) => console.error(e),
     });
     if ((this.CurrentUser2 = this.Role)) {
-      this.router.navigate(["/reservas"]);
+      /*setTimeout(() => {
+        this.router.navigate(["/reservas"]);
+      }, 4000);*/
     }
   }
 
