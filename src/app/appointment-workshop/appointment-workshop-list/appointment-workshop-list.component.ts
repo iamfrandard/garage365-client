@@ -125,6 +125,7 @@ export class AppointmentWorkshopListComponent {
   this._AppointmentWorkshopService.getAll().subscribe({
     next: (data: any) => {
       this.tutorials = data.appointments || [];
+      console.log( this.tutorials);
       this.user = data.user;
 
       if (this.tutorials) {
