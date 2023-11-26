@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Appointment } from '../models/appointment.model';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Appointment } from "../models/appointment.model";
 
-const baseUrl = 'https://goldfish-app-67lk9.ondigitalocean.app/api/appointmentClient';
+const baseUrl =
+  "https://goldfish-app-67lk9.ondigitalocean.app/api/appointmentClient";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AppointmentClientService {
   constructor(private http: HttpClient) {}
@@ -34,7 +35,7 @@ export class AppointmentClientService {
       `${baseUrl}/${AppointmentID}/cancelAppointment`,
       Date
     );
-  }  
+  }
 
   getAllEmployee(workshopName: any) {
     return this.http.get<any[]>(`${baseUrl}/${workshopName}/getAllEmployee`);
@@ -70,7 +71,7 @@ export class AppointmentClientService {
       return this.http.put(`${baseUrl}/${appointmentId}/bill`, data);
     } else {
       const httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        headers: new HttpHeaders({ "Content-Type": "application/json" }),
       };
       return this.http.put(
         `${baseUrl}/${appointmentId}/bill`,

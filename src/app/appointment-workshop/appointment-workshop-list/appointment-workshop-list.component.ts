@@ -1,41 +1,41 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { Appointment } from 'src/app/models/appointment.model';
-import { Usuario } from 'src/app/models/usuario.model';
-import { AppointmentClientService } from 'src/app/services/appointmentClient.service';
-import { AppointmentWorkshopService } from 'src/app/services/appointmentWorkshop.service';
-import { StorageServiceComponent } from 'src/app/services/storage.service';
+import { Component, Input, ViewChild } from "@angular/core";
+import { Appointment } from "src/app/models/appointment.model";
+import { Usuario } from "src/app/models/usuario.model";
+import { AppointmentClientService } from "src/app/services/appointmentClient.service";
+import { AppointmentWorkshopService } from "src/app/services/appointmentWorkshop.service";
+import { StorageServiceComponent } from "src/app/services/storage.service";
 
 @Component({
-  selector: 'app-appointment-workshop-list',
-  templateUrl: './appointment-workshop-list.component.html',
-  styleUrls: ['./appointment-workshop-list.component.css'],
+  selector: "app-appointment-workshop-list",
+  templateUrl: "./appointment-workshop-list.component.html",
+  styleUrls: ["./appointment-workshop-list.component.css"],
 })
 export class AppointmentWorkshopListComponent {
-  @ViewChild('billingModal', { static: true }) billingModalContent: any;
+  @ViewChild("billingModal", { static: true }) billingModalContent: any;
   billAmount: any = null;
   billFile: any = null;
   @Input() Appointment: Appointment = {
-    UserID: '',
-    Workshop: '',
-    Schedule: '',
-    Status: '',
-    Bill: { amount: '', file: '' },
+    UserID: "",
+    Workshop: "",
+    Schedule: "",
+    Status: "",
+    Bill: { amount: "", file: "" },
     Confirm: false,
   };
 
   @Input() User: Usuario = {
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    idNumber: '',
-    email: '',
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    idNumber: "",
+    email: "",
   };
 
   tutorials?: Appointment[];
   appointment1?: Appointment[];
   appointment2?: Appointment[];
   appointment3?: Appointment[];
-  
+
   user?: Usuario[];
   currentAppointment: Appointment = {};
   currentUser: Usuario = {};
@@ -45,11 +45,11 @@ export class AppointmentWorkshopListComponent {
 
   fechaActual: Date = new Date();
   fechaFormatoISO: string = this.fechaActual.toISOString();
-  
-  message = '';
 
-  CurrentUser: any = '';
-  
+  message = "";
+
+  CurrentUser: any = "";
+
   constructor(
     private storageService: StorageServiceComponent,
     private _AppointmentWorkshopService: AppointmentWorkshopService,
@@ -63,7 +63,7 @@ export class AppointmentWorkshopListComponent {
   }
 
   resetSelectedEmployee(): void {
-    this.selectedEmployee = 'null';
+    this.selectedEmployee = "null";
   }
 
   getAllEmployee(): void {
@@ -108,36 +108,46 @@ export class AppointmentWorkshopListComponent {
       });
   }
 
-  selectedOption: string = '';
+  selectedOption: string = "";
 
   optionSelected() {
-    if (this.selectedOption === '1') {
-      this.updateStatus('Recepcion');
-    } else if (this.selectedOption === '2') {
-      this.updateStatus('En Progreso');
-    } else if (this.selectedOption === '3') {
-      this.updateStatus('Finalizado');
-      this.selectedOption = 'Finalizado'
+    if (this.selectedOption === "1") {
+      this.updateStatus("Recepcion");
+    } else if (this.selectedOption === "2") {
+      this.updateStatus("En Progreso");
+    } else if (this.selectedOption === "3") {
+      this.updateStatus("Finalizado");
+      this.selectedOption = "Finalizado";
     }
   }
 
   retrieveTutorials(): void {
-  this._AppointmentWorkshopService.getAll().subscribe({
-    next: (data: any) => {
-      this.tutorials = data.appointments || [];
-      console.log( this.tutorials);
-      this.user = data.user;
+    this._AppointmentWorkshopService.getAll().subscribe({
+      next: (data: any) => {
+        this.tutorials = data.appointments || [];
+        this.user = data.user;
 
-      if (this.tutorials) {
-        this.tutorials = this.tutorials.filter(tutorial => tutorial.Workshop == this.CurrentUser && tutorial.Status !== 'Cancelada');
-        this.appointment1 = this.tutorials.filter(tutorial => tutorial.Confirm == false);
-        this.appointment2 = this.tutorials.filter(tutorial => tutorial.Confirm == true && tutorial.Status !== 'Completado');
-        this.appointment3 = this.tutorials.filter(tutorial => tutorial.Status == 'Completado');
-      }
-    },
-    error: (e) => console.error(e),
-  });
-}
+        if (this.tutorials) {
+          this.tutorials = this.tutorials.filter(
+            (tutorial) =>
+              tutorial.Workshop == this.CurrentUser &&
+              tutorial.Status !== "Cancelada"
+          );
+          this.appointment1 = this.tutorials.filter(
+            (tutorial) => tutorial.Confirm == false
+          );
+          this.appointment2 = this.tutorials.filter(
+            (tutorial) =>
+              tutorial.Confirm == true && tutorial.Status !== "Completado"
+          );
+          this.appointment3 = this.tutorials.filter(
+            (tutorial) => tutorial.Status == "Completado"
+          );
+        }
+      },
+      error: (e) => console.error(e),
+    });
+  }
 
   setActiveTutorial(data: Appointment, User: Usuario): void {
     this.currentAppointment = data;
@@ -150,35 +160,39 @@ export class AppointmentWorkshopListComponent {
 
   cancelAppointment(): void {
     const workshopString: string = String(this.currentAppointment.id);
-  
-    this._AppointmentClientService.cancelAppointment(workshopString, this.fechaFormatoISO)
+
+    this._AppointmentClientService
+      .cancelAppointment(workshopString, this.fechaFormatoISO)
       .subscribe(
         (isSuccess) => {
           if (isSuccess) {
-            this.message = "Su reserva ha sido cancelada exitosamente. Agradecemos su comprensión.";
+            this.message =
+              "Su reserva ha sido cancelada exitosamente. Agradecemos su comprensión.";
           } else {
-            this.message = "Lo sentimos, las reservas solo pueden cancelarse con al menos 3 días de anticipación. Para más detalles, por favor revise nuestras políticas de cancelación.";
+            this.message =
+              "Lo sentimos, las reservas solo pueden cancelarse con al menos 3 días de anticipación. Para más detalles, por favor revise nuestras políticas de cancelación.";
           }
         },
         (error) => {
-          console.error('Error en la solicitud de cancelación');
-          this.message = "Ocurrió un error al procesar su solicitud de cancelación. Por favor, póngase en contacto con el equipo de soporte de Garage365 en garage365@gmail.com. Lamentamos los inconvenientes causados.";
+          console.error("Error en la solicitud de cancelación");
+          this.message =
+            "Ocurrió un error al procesar su solicitud de cancelación. Por favor, póngase en contacto con el equipo de soporte de Garage365 en garage365@gmail.com. Lamentamos los inconvenientes causados.";
         }
       );
   }
 
   async saveBillDetails() {
     const formData = new FormData();
-      formData.append('billFile', this.billFile, this.billFile.name);
-      formData.append('Bill.amount', this.billAmount.toString());
+    formData.append("billFile", this.billFile, this.billFile.name);
+    formData.append("Bill.amount", this.billAmount.toString());
 
-      try {
-          const res = await this._AppointmentClientService
-              .updateL(this.currentAppointment.id, formData)
-              .toPromise();
-      } catch (e) {
-        console.error(e);
-      }
+    try {
+      const res = await this._AppointmentClientService
+        .updateL(this.currentAppointment.id, formData)
+        .toPromise();
+    } catch (e) {
+      console.error("Error al actualizar la factura:", e);
+    }
   }
 
   onFileChange(event: any) {
