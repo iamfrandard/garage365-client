@@ -116,8 +116,7 @@ export class AppointmentWorkshopListComponent {
     } else if (this.selectedOption === "2") {
       this.updateStatus("En Progreso");
     } else if (this.selectedOption === "3") {
-      this.updateStatus("Finalizado");
-      this.refreshWindow();
+      
     }
   }
 
@@ -190,6 +189,8 @@ export class AppointmentWorkshopListComponent {
       const res = await this._AppointmentClientService
         .updateL(this.currentAppointment.id, formData)
         .toPromise();
+        this.updateStatus("Finalizado");
+      this.refreshWindow();
     } catch (e) {
       console.error("Error al actualizar la factura:", e);
     }
