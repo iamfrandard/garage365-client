@@ -4,6 +4,7 @@ import { Usuario } from "src/app/models/usuario.model";
 import { AppointmentClientService } from "src/app/services/appointmentClient.service";
 import { AppointmentWorkshopService } from "src/app/services/appointmentWorkshop.service";
 import { StorageServiceComponent } from "src/app/services/storage.service";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: "app-appointment-workshop-list",
@@ -53,7 +54,8 @@ export class AppointmentWorkshopListComponent {
   constructor(
     private storageService: StorageServiceComponent,
     private _AppointmentWorkshopService: AppointmentWorkshopService,
-    private _AppointmentClientService: AppointmentClientService
+    private _AppointmentClientService: AppointmentClientService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -187,8 +189,14 @@ export class AppointmentWorkshopListComponent {
       const res = await this._AppointmentClientService
         .updateL(this.currentAppointment.id, formData)
         .toPromise();
-        this.updateStatus("Finalizado");
+      this.updateStatus("Finalizado");
       this.refreshWindow();
+      this.messageService.add({
+        severity: "success",
+        summary: "Excelente",
+        detail: "¡La factura ha sido registrada exitosamente!",
+        life: 15000,
+      });
     } catch (e) {
       console.error("Error al actualizar la factura:", e);
     }
