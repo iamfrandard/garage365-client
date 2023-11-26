@@ -115,8 +115,6 @@ export class AppointmentWorkshopListComponent {
       this.updateStatus("Recepcion");
     } else if (this.selectedOption === "2") {
       this.updateStatus("En Progreso");
-    } else if (this.selectedOption === "3") {
-      
     }
   }
 
