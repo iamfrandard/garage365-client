@@ -56,9 +56,8 @@ export class TallerListComponent implements OnInit {
     this.socketService.newMessage$.subscribe((message: ChatMessage) => {
       console.log("Nuevo mensaje recibido:", message);
       if (
-        message.tallerId &&
         message.sessionId !==
-          this.currentSessionId /*(this.selectedTaller === undefined ||
+        this.currentSessionId /*(this.selectedTaller === undefined ||
           this.selectedTaller !== message.sender)*/
       ) {
         this.showNotification(message);
