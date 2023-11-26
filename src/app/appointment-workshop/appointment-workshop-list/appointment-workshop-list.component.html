@@ -641,7 +641,7 @@
                   class="form-control"
                   name="billFile"
                   id="billFile"
-                  (change)="onFileChange($event); optionSelected()"
+                  (change)="onFileChange($event)"
                 />
               </div>
             </div>
@@ -659,7 +659,7 @@
           <button
             class="btn btn-outline-success"
             [disabled]="!billAmount && !billFile"
-            (click)="saveBillDetails()"
+            (click)="saveBillDetails(); optionSelected(); refreshWindow()"
           >
             Aceptar
           </button>
