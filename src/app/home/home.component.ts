@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import { NgForm } from '@angular/forms';
+import { StorageServiceComponent } from "../services/storage.service";
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,12 @@ import { NgForm } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   content?: string;
+  currentUser = "";
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private storageService: StorageServiceComponent) {}
 
   ngOnInit(): void {
+    this.currentUser = this.storageService.getUser().roles;
     this.userService.getPublicContent().subscribe({
       next: (data) => {
         this.content = data;

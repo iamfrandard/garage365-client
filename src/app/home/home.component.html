@@ -9,7 +9,16 @@
           Encuentra el taller perfecto para tu vehículo en un solo lugar:
           ¡Nuestra plataforma, tu solución automotriz en línea!
         </h2>
-        <a href="/busqueda" class="btn-get-started scrollto"
+        <a
+          href="/registro"
+          class="btn-get-started scrollto"
+          *ngIf="currentUser == null"
+          >Registrarse</a
+        >
+        <a
+          href="/busqueda"
+          class="btn-get-started scrollto"
+          *ngIf="currentUser == 'ROLE_USER' || currentUser == 'ROLE_MODERATOR'"
           >Busqueda de Talleres</a
         >
       </div>
