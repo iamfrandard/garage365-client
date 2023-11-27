@@ -41,23 +41,9 @@ export class TallerListComponent implements OnInit {
       });
     }
 
-    console.log("Current1:", this.currentSessionId);
-
     this.searchService.getAll().subscribe(
       (talleres) => {
         this.talleres = talleres;
-        this.socketService.newMessage$.subscribe((message: ChatMessage) => {
-          console.log("Nuevo mensaje recibido:", message);
-          console.log("session:", message.sessionId);
-          console.log("Current:", this.currentSessionId);
-          this.showNotification(message);
-          if (
-            message.sessionId !==
-            this.currentSessionId /*(this.selectedTaller === undefined ||
-              this.selectedTaller !== message.sender)*/
-          ) {
-          }
-        });
       },
       (error) => {
         console.error("Error al obtener la lista de talleres", error);
@@ -108,6 +94,21 @@ export class TallerListComponent implements OnInit {
           this.selectedTaller = taller;
         }
       });
+
+    console.log("Current1:", this.currentSessionId);
+
+    this.socketService.newMessage$.subscribe((message: ChatMessage) => {
+      console.log("Nuevo mensaje recibido:", message);
+      console.log("session:", message.sessionId);
+      console.log("Current:", this.currentSessionId);
+      this.showNotification(message);
+      if (
+        message.sessionId !==
+        this.currentSessionId /*(this.selectedTaller === undefined ||
+          this.selectedTaller !== message.sender)*/
+      ) {
+      }
+    });
   }
 
   updateChatVisibility(show: boolean) {
