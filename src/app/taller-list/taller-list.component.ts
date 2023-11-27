@@ -86,21 +86,6 @@ export class TallerListComponent implements OnInit {
       .pipe(take(1))
       .subscribe((sessionData) => {
         this.currentSessionId = sessionData._id;
-        console.log("Current1:", this.currentSessionId);
-
-        this.socketService.newMessage$.subscribe((message: ChatMessage) => {
-          console.log("Nuevo mensaje recibido:", message);
-          console.log("session:", message.sessionId);
-          console.log("Current:", this.currentSessionId);
-
-          if (
-            message.sessionId !==
-            this.currentSessionId /*(this.selectedTaller === undefined ||
-              this.selectedTaller !== message.sender)*/
-          ) {
-            this.showNotification(message);
-          }
-        });
         localStorage.setItem("currentSessionId", sessionData._id);
         if (sessionData.isNewSession) {
           this.sendMessageToTaller(taller);
@@ -109,6 +94,16 @@ export class TallerListComponent implements OnInit {
           this.selectedTaller = taller;
         }
       });
+
+    this.socketService.newMessage$.subscribe((message: ChatMessage) => {
+      this.showNotification(message);
+      /*if (
+        message.sessionId !==
+        this.currentSessionId (this.selectedTaller === undefined ||
+              this.selectedTaller !== message.sender)
+      ) {
+      }*/
+    });
   }
 
   updateChatVisibility(show: boolean) {
