@@ -52,9 +52,12 @@ export class TallerListComponent implements OnInit {
 
     const user = this.storageService.getUser();
     this.userName = user.email;
+
+    this.socketService.newMessage$.subscribe((message: ChatMessage) => {
+      this.showNotification(message);
+    });
   }
   showNotification(message: ChatMessage) {
-    console.log("Mostrando notificación para el mensaje:", message);
     this.messageService.add({
       severity: "info",
       summary: `Nuevo mensaje de ${message.tallerName}`,
@@ -94,16 +97,6 @@ export class TallerListComponent implements OnInit {
           this.selectedTaller = taller;
         }
       });
-
-    this.socketService.newMessage$.subscribe((message: ChatMessage) => {
-      this.showNotification(message);
-      /*if (
-        message.sessionId !==
-        this.currentSessionId (this.selectedTaller === undefined ||
-              this.selectedTaller !== message.sender)
-      ) {
-      }*/
-    });
   }
 
   updateChatVisibility(show: boolean) {
