@@ -44,6 +44,18 @@ export class TallerListComponent implements OnInit {
     this.searchService.getAll().subscribe(
       (talleres) => {
         this.talleres = talleres;
+        this.socketService.newMessage$.subscribe((message: ChatMessage) => {
+          console.log("Nuevo mensaje recibido:", message);
+          console.log("session:", message.sessionId);
+          console.log("Current:", this.currentSessionId);
+          this.showNotification(message);
+          if (
+            message.sessionId !==
+            this.currentSessionId /*(this.selectedTaller === undefined ||
+              this.selectedTaller !== message.sender)*/
+          ) {
+          }
+        });
       },
       (error) => {
         console.error("Error al obtener la lista de talleres", error);
@@ -52,19 +64,6 @@ export class TallerListComponent implements OnInit {
 
     const user = this.storageService.getUser();
     this.userName = user.email;
-
-    this.socketService.newMessage$.subscribe((message: ChatMessage) => {
-      console.log("Nuevo mensaje recibido:", message);
-      console.log("session:", message.sessionId);
-      console.log("Current:", this.currentSessionId);
-      this.showNotification(message);
-      if (
-        message.sessionId !==
-        this.currentSessionId /*(this.selectedTaller === undefined ||
-          this.selectedTaller !== message.sender)*/
-      ) {
-      }
-    });
   }
   showNotification(message: ChatMessage) {
     console.log("Mostrando notificación para el mensaje:", message);
