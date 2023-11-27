@@ -41,6 +41,8 @@ export class TallerListComponent implements OnInit {
       });
     }
 
+    console.log("Current:", this.currentSessionId);
+
     this.searchService.getAll().subscribe(
       (talleres) => {
         this.talleres = talleres;
