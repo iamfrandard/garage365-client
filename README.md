@@ -42,4 +42,4 @@ Priorizamos la seguridad y la confidencialidad de los datos de los usuarios. Uti
 
 ## Licencia
 
-Este proyecto está bajo la Licencia PUCMM.
+Este proyecto está bajo la Licencia de la Pontificia Universidad Católica Madre y Maestra (2023).
