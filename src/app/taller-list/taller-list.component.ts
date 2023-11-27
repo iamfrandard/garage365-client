@@ -57,12 +57,12 @@ export class TallerListComponent implements OnInit {
       console.log("Nuevo mensaje recibido:", message);
       console.log("session:", message.sessionId);
       console.log("Current:", this.currentSessionId);
+      this.showNotification(message);
       if (
         message.sessionId !==
         this.currentSessionId /*(this.selectedTaller === undefined ||
           this.selectedTaller !== message.sender)*/
       ) {
-        this.showNotification(message);
       }
     });
   }
