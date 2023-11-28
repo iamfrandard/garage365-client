@@ -298,6 +298,7 @@ export class AppointmentClientDetailsComponent {
       hour = hour ? hour : 12;
       times.push(`${hour} ${amPm}`);
     }
+    console.log(times);
     return times;
   }
 
