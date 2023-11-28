@@ -190,7 +190,7 @@ export class AppointmentWorkshopListComponent {
         .updateL(this.currentAppointment.id, formData)
         .toPromise();
       this.updateStatus("Finalizado");
-      setTimeout(this.refreshWindow, 5000);
+      setTimeout(this.refreshWindow, 3000);
       this.messageService.add({
         severity: "success",
         summary: "Excelente",
